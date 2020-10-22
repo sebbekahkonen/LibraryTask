@@ -57,7 +57,6 @@ public class Main {
 		newBook = new BookLibrary('m', 12345, "BookName2", 300, 500, "Author2");
 		newBook = new BookLibrary('m', 12344, "BookName3", 400, 150, "Author3");
 		newBook = new BookLibrary('m', 12333, "BookName4", 200, 100, "Author4");
-		
 		//
 		
 		while(runprogram) {
