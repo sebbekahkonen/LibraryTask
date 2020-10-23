@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-public class Movie implements Serializable{
+public class Movie {
 	protected int id;
 	protected String title;
 	protected int value;
@@ -16,7 +14,7 @@ public class Movie implements Serializable{
 	}
 	
 	public String getMoviesString() {
-		return String.format("%s (Movie): %s",id, title);
+		return String.format("%s (Movie): %s.",id, title);
 //		return String.format("%s,(Movie): title: %s, value: %s, duration: %s, raiting: %s", 
 //				id, title, value, duration, raiting);
 	}

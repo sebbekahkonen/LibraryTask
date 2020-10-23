@@ -32,15 +32,16 @@ public class Product implements Serializable {
 	//Dialogues
 	public void dialogueMovie() {
 		try {
-		System.out.println("id");
+		System.out.print("Enter id: ");
 		int id = scanner.nextInt();
-		System.out.println("title:");
+		System.out.print("Enter title: ");
+		scanner.nextLine();
 		String title = scanner.nextLine();
-		System.out.println("value:");
+		System.out.print("Enter value: ");
 		int value = scanner.nextInt();
-		System.out.println("pages:");
+		System.out.print("Enter pages: ");
 		int duration = scanner.nextInt();
-		System.out.println("raiting:");
+		System.out.println("Enter raiting: ");
 		float raiting = scanner.nextFloat();
 		if(raiting > 10 || raiting < 0) {
 			
@@ -53,15 +54,17 @@ public class Product implements Serializable {
 	}
 	public void dialogueBook() {
 		try {
-		System.out.println("id");
+		System.out.print("Enter id: ");
 		int id = scanner.nextInt();
 		System.out.print("title: ");
-		String title = scanner.next();
-		System.out.print("value: ");
+		scanner.nextLine();
+		String title = scanner.nextLine();
+		System.out.print("Enter value: ");
 		int value = scanner.nextInt();
-		System.out.print("pages: ");
+		System.out.print("Enter pages: ");
 		int pages = scanner.nextInt();
-		System.out.print("author: ");
+		System.out.print("Enter author: ");
+		scanner.nextLine();
 		String publisher = scanner.next();
 		books.add(book = new Book(id, title, value, pages, publisher));
 		saveid.add(id);
