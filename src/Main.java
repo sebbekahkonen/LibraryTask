@@ -1,11 +1,21 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements Serializable {
 	
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct;
+	
 
 	enum Commands {
 		LIST,
@@ -34,6 +44,7 @@ public class Main {
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
+			System.out.println("Enter \"b\" for book or \"m\" for movie");
 			char c = scanner.next(".").charAt(0);
 			if (c == 'm') {
 				newProduct = new Product(c);
@@ -64,16 +75,24 @@ public class Main {
 		}
 		return usercommand;
 	}
+	
+	
 
 	public static void main(String[] args) {
+		
+		newProduct.initializeBookList();
+		
+		
 		while (runprogram) {
 			// TEST
 			System.out.println("enter command");
 			String useroption = scanner.next();
 			option(useroption);
 			//
-
+			
 		}
+		
+		
 	}
 
 }

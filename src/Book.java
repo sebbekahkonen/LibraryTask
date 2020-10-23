@@ -1,4 +1,12 @@
-public class Book{
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.List;
+
+public class Book implements Serializable{
 	protected int id;
 	protected String title;
 	protected int value;
@@ -14,10 +22,11 @@ public class Book{
 	}
 	
 	public String getBooksString() {
-		return String.format("%s, title: %s, value: %s, duration: %s, raiting: %s", 
+		return String.format("%s, (book)title: %s, value: %skr, pages: %s, author: %s", 
 				id, title, value, pages, publisher);
 	} 
 	public String getBooks() {
 		return id+title+value+pages+publisher;
 	}
+	
 }

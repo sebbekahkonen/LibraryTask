@@ -1,9 +1,17 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Product {
+public class Product implements Serializable {
 	protected Book book;
 	protected Movie movie;
 	protected Scanner scanner = new Scanner(System.in);
@@ -57,6 +65,7 @@ public class Product {
 		String publisher = scanner.next();
 		books.add(book = new Book(id, title, value, pages, publisher));
 		saveid.add(id);
+		//saveBookList();
 		}catch(InputMismatchException e) {
 			System.out.println("Invalid format, try again");
 		}
@@ -84,6 +93,45 @@ public class Product {
 	
 	// Remove
 	public void removeatID(int id) {
+		
+	}
+	
+	public static void initializeBookList()	{
+		try {
+			File file = new File("book_list.bin");
+			FileInputStream fin = new FileInputStream(file);
+			ObjectInputStream oin = new ObjectInputStream(fin);
+			books = (List<Book>) oin.readObject();
+			oin.close();
+			System.out.println(books.get(0).getBooksString());
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void saveBookList()	{
+		File file = new File("book_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(books);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

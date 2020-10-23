@@ -1,4 +1,6 @@
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
 	protected int id;
 	protected String title;
 	protected int value;
