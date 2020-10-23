@@ -14,9 +14,8 @@ public class Main implements Serializable {
 	
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
-	static Product newProduct;
+	static Product newProduct = new Product();
 
-	
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -48,17 +47,9 @@ public class Main implements Serializable {
 			System.out.println("Enter \"b\" for book or \"m\" for movie");
 
 			try {
-
 			char c = scanner.next(".").charAt(0);
-			if (c == 'm') {
-				newProduct = new Product(c);
-
-			} else if (c == 'b') {
-				newProduct = new Product(c);
-			} else {
-				System.out.println("sorry that's not a valid answer");
+				newProduct.dialogue(c);
 				break;
-			}
 			}catch(InputMismatchException e) {
 				break;
 			}
@@ -85,21 +76,14 @@ public class Main implements Serializable {
 	
 
 	public static void main(String[] args) {
-		
 		newProduct.initializeBookList();
-		
-		
 		while (runprogram) {
 			// TEST
-			
 			System.out.println("enter command");
 			String useroption = scanner.next();
 			option(useroption);
-			//
-			
+			//	
 		}
-		
-		
 	}
 
 }

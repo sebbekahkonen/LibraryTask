@@ -19,64 +19,57 @@ public class Product implements Serializable {
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
 
-	public Product(char c) {
-		if (c == 'b') {
-			dialogueBook();
-		} else if (c == 'm') {
-			dialogueMovie();
-		} else {
-			System.out.println("sorry that char isnt valid");
-		}
+	public Product() {
+
 	}
-	
-	//Dialogues
-	public void dialogueMovie() {
+
+	// Dialogues
+	public void dialogue(char c) {
 		try {
-		System.out.print("Enter id: ");
-		int id = scanner.nextInt();
-		System.out.print("Enter title: ");
-		scanner.nextLine();
-		String title = scanner.nextLine();
-		System.out.print("Enter value: ");
-		int value = scanner.nextInt();
-		System.out.print("Enter pages: ");
-		int duration = scanner.nextInt();
-		System.out.println("Enter raiting: ");
-		float raiting = scanner.nextFloat();
-		if(raiting > 10 || raiting < 0) {
-			
-		}
-		movies.add(movie = new Movie(id, title, value, duration, raiting));
-		saveid.add(id);
-		}catch(InputMismatchException e) {
-			System.out.println("Invalid format, try again");
-		}
-	}
-	public void dialogueBook() {
-		try {
-		System.out.print("Enter id: ");
-		int id = scanner.nextInt();
-		System.out.print("title: ");
-		scanner.nextLine();
-		String title = scanner.nextLine();
-		System.out.print("Enter value: ");
-		int value = scanner.nextInt();
-		System.out.print("Enter pages: ");
-		int pages = scanner.nextInt();
-		System.out.print("Enter author: ");
-		scanner.nextLine();
-		String publisher = scanner.next();
-		books.add(book = new Book(id, title, value, pages, publisher));
-		saveid.add(id);
-		//saveBookList();
-		}catch(InputMismatchException e) {
+			if (c == 'm') {
+				System.out.print("Enter id: ");
+				int id = scanner.nextInt();
+				System.out.print("Enter title: ");
+				scanner.nextLine();
+				String title = scanner.nextLine();
+				System.out.print("Enter value: ");
+				int value = scanner.nextInt();
+				System.out.print("Enter duration: ");
+				int duration = scanner.nextInt();
+				System.out.print("Enter raiting: ");
+				float raiting = scanner.nextFloat();
+				if (raiting > 10 || raiting < 0) {
+
+				}
+				movies.add(movie = new Movie(id, title, value, duration, raiting));
+				saveid.add(id);
+			} else if (c == 'b') {
+				System.out.print("Enter id: ");
+				int id = scanner.nextInt();
+				System.out.print("title: ");
+				scanner.nextLine();
+				String title = scanner.nextLine();
+				System.out.print("Enter value: ");
+				int value = scanner.nextInt();
+				System.out.print("Enter pages: ");
+				int pages = scanner.nextInt();
+				System.out.print("Enter author: ");
+				scanner.nextLine();
+				String publisher = scanner.next();
+				books.add(book = new Book(id, title, value, pages, publisher));
+				saveid.add(id);
+				// saveBookList();
+			} else {
+				System.out.println("sorry that char isnt valid");
+			}
+		} catch (InputMismatchException e) {
 			System.out.println("Invalid format, try again");
 		}
 	}
 
-	//Search
+	// Search
 	public void searchID(int id) {
-			
+
 	}
 
 	// Getters
@@ -85,28 +78,29 @@ public class Product implements Serializable {
 			System.out.println(id);
 		}
 	}
+
 	public void getBooksAndMovies() {
 		for (Book book : books)
 			System.out.println(book.getBooksString());
 		for (Movie movie : movies)
 			System.out.println(movie.getMoviesString());
-		}
+	}
 
 	// Remove
 	public void removeatID(int id) {
-		
-	}
-	
 
-	public static void initializeBookList()	{
+	}
+
+	public static void initializeBookList() {
 		try {
 			File file = new File("book_list.bin");
 			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			books = (List<Book>) oin.readObject();
 			oin.close();
-			System.out.println(books.get(0).getBooksString());
-			
+			for (Book book : books) {
+				System.out.println(book.getBooksString());
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,8 +112,8 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void saveBookList()	{
+
+	public static void saveBookList() {
 		File file = new File("book_list.bin");
 		FileOutputStream fout;
 		try {
@@ -134,9 +128,8 @@ public class Product implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
-	
 	
