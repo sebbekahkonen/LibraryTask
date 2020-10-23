@@ -22,8 +22,10 @@ public class Book implements Serializable{
 	}
 	
 	public String getBooksString() {
+
 		return String.format("%s, (book)title: %s, value: %skr, pages: %s, author: %s", 
 				id, title, value, pages, publisher);
+
 	} 
 	public String getBooks() {
 		return id+title+value+pages+publisher;

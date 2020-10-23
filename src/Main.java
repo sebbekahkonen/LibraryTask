@@ -8,15 +8,15 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
 public class Main implements Serializable {
 	
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct;
-	
 
+	
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -44,7 +44,11 @@ public class Main implements Serializable {
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
+
 			System.out.println("Enter \"b\" for book or \"m\" for movie");
+
+			try {
+
 			char c = scanner.next(".").charAt(0);
 			if (c == 'm') {
 				newProduct = new Product(c);
@@ -55,7 +59,9 @@ public class Main implements Serializable {
 				System.out.println("sorry that's not a valid answer");
 				break;
 			}
-			break;
+			}catch(InputMismatchException e) {
+				break;
+			}
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
 
@@ -85,6 +91,7 @@ public class Main implements Serializable {
 		
 		while (runprogram) {
 			// TEST
+			
 			System.out.println("enter command");
 			String useroption = scanner.next();
 			option(useroption);
