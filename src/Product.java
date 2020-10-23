@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Product {
 	protected Book book;
 	protected Movie movie;
-	protected Scanner scanner = new Scanner(System.in);
+	protected final Scanner scanner = new Scanner(System.in);
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
@@ -27,7 +27,7 @@ public class Product {
 		System.out.println("id");
 		int id = scanner.nextInt();
 		System.out.println("title:");
-		String title = scanner.next();
+		String title = scanner.nextLine();
 		System.out.println("value:");
 		int value = scanner.nextInt();
 		System.out.println("pages:");
@@ -47,13 +47,13 @@ public class Product {
 		try {
 		System.out.println("id");
 		int id = scanner.nextInt();
-		System.out.println("title:");
+		System.out.print("title: ");
 		String title = scanner.next();
-		System.out.println("value:");
+		System.out.print("value: ");
 		int value = scanner.nextInt();
-		System.out.println("pages:");
+		System.out.print("pages: ");
 		int pages = scanner.nextInt();
-		System.out.println("author:");
+		System.out.print("author: ");
 		String publisher = scanner.next();
 		books.add(book = new Book(id, title, value, pages, publisher));
 		saveid.add(id);
@@ -62,10 +62,9 @@ public class Product {
 		}
 	}
 
+	//Search
 	public void searchID(int id) {
-		int index = movies.indexOf(id);
-		String idToString = Integer.toString(id);
-		System.out.println(index);	
+			
 	}
 
 	// Getters
@@ -80,12 +79,12 @@ public class Product {
 		for (Movie movie : movies)
 			System.out.println(movie.getMoviesString());
 		}
-	
-	
+
 	// Remove
 	public void removeatID(int id) {
 		
 	}
+	
 }
 	
 	

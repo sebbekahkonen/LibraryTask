@@ -14,8 +14,9 @@ public class Book{
 	}
 	
 	public String getBooksString() {
-		return String.format("%s, title: %s, value: %s, duration: %s, raiting: %s", 
-				id, title, value, pages, publisher);
+		return String.format("%s (Movie): %s.",id, title);
+//		return String.format("%s,(Book) title: %s, value: %s, duration: %s, publisher: %s", 
+//				id, title, value, pages, publisher);
 	} 
 	public String getBooks() {
 		return id+title+value+pages+publisher;

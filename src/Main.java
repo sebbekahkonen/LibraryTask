@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -6,7 +7,6 @@ public class Main {
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct;
-
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -34,6 +34,7 @@ public class Main {
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
+			try {
 			char c = scanner.next(".").charAt(0);
 			if (c == 'm') {
 				newProduct = new Product(c);
@@ -44,7 +45,9 @@ public class Main {
 				System.out.println("sorry that's not a valid answer");
 				break;
 			}
-			break;
+			}catch(InputMismatchException e) {
+				break;
+			}
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
 
@@ -68,6 +71,7 @@ public class Main {
 	public static void main(String[] args) {
 		while (runprogram) {
 			// TEST
+			
 			System.out.println("enter command");
 			String useroption = scanner.next();
 			option(useroption);
