@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Product implements Serializable {
+	private static final int serialVersionUID = 136420;
 	protected Book book;
 	protected Movie movie;
 	protected final Scanner scanner = new Scanner(System.in);
@@ -75,7 +76,9 @@ public class Product implements Serializable {
 
 	// Search
 	public void searchID(int id) {
-
+		for (Integer iD : saveid)	{
+			
+		}
 	}
 
 	// Getters
@@ -104,9 +107,9 @@ public class Product implements Serializable {
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			books = (List<Book>) oin.readObject();
 			oin.close();
-//			for (Book book : books) {
-//				System.out.println(book.getBooksString());
-//			}
+			for (Book book : books) {
+				System.out.println(book.getBooksString());
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,9 +129,9 @@ public class Product implements Serializable {
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			movies = (List<Movie>) oin.readObject();
 			oin.close();
-//			for (Movie movie : movies) {
-//				System.out.println(movie.getMoviesString());
-//			}
+			for (Movie movie : movies) {
+				System.out.println(movie.getMoviesString());
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,7 +151,7 @@ public class Product implements Serializable {
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			saveid = (List<Integer>) oin.readObject();
 			oin.close();
-//			System.out.println(saveid);
+			System.out.println(saveid);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

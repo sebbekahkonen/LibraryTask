@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main implements Serializable {
-	
+	private static final int serialVersionUID = 136420;
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct = new Product();
@@ -77,20 +77,41 @@ public class Main implements Serializable {
 
 	public static void main(String[] args) {
 		
+		newProduct.saveid.add(1122);
+		newProduct.saveid.add(1123);
+		newProduct.saveid.add(5566);
+		newProduct.saveid.add(5567);
+		
+		File file = new File("id_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(newProduct.saveid);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 //		newProduct.initializeIdList();
-		
+//		
 //		newProduct.initializeMovieList();
 //		
 //		newProduct.initializeBookList();
-//		
-		while (runprogram) {
-			// TEST
-			System.out.println("enter command");
-			String useroption = scanner.next();
-			option(useroption);
-			//	
-		}
+		
+//		while (runprogram) {
+//			// TEST
+//			System.out.println("enter command");
+//			String useroption = scanner.next();
+//			option(useroption);
+//			//	
+//		}
 	}
 
 }
