@@ -76,7 +76,6 @@ public class Main implements Serializable {
 	
 
 	public static void main(String[] args) {
-		
 		newProduct.saveid.add(1122);
 		newProduct.saveid.add(1123);
 		newProduct.saveid.add(5566);
@@ -96,6 +95,7 @@ public class Main implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
 		
 		
