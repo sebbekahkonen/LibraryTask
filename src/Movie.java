@@ -7,7 +7,7 @@ public class Movie implements Serializable {
 	protected int duration;
 	protected double raiting;
 
-	public Movie(int id, String title, int value, int duration, float raiting) {
+	public Movie(int id, String title, int value, int duration, double raiting) {
 		this.id = id;
 		this.title = title;
 		this.value = value;
