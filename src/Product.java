@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +20,8 @@ public class Product implements Serializable {
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
+
+	
 
 	public Product() {
 
@@ -94,12 +97,39 @@ public class Product implements Serializable {
 		for (Movie movie : movies)
 			System.out.println(movie.getMoviesString());
 	}
-
 	// Remove
 	public void removeAtID(int id) {
+		String id2 = Integer.toString(id);
+		if (saveid.contains(id)) {
 
+			// Movies Iterator
+			Iterator<Movie> iterMovies = movies.iterator();
+			while (iterMovies.hasNext()) {
+				Movie target = iterMovies.next();
+				String targetSplit = target.getMoviesString().split(",")[0];
+				if (targetSplit.equals(id2)) {
+					iterMovies.remove();
+					System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
+				}
+			}
+
+			// Books Iterator
+			Iterator<Book> iterBooks = books.iterator();
+			while (iterBooks.hasNext()) {
+				Book target2 = iterBooks.next();
+				String target2Split = target2.getBooksString().split(",")[0];
+				if (target2Split.equals(id2)) {
+					iterBooks.remove();
+					System.out.println("You've successfully removed \"" + target2.getTitle() + "\"");
+				}
+			}
+		} else if (saveid.contains(id) == false) {
+			System.out.println("Book or Movie with \"" + id + "\" does not exist");
+		}
+		if (movies.isEmpty() == true && books.isEmpty() == true) {
+			System.out.println("There are no \"books\" or \"movies\" in the library to remove");
+		}
 	}
-
 	public static void initializeBookList() {
 		try {
 			File file = new File("book_list.bin");

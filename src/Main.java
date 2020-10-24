@@ -55,12 +55,15 @@ public class Main implements Serializable {
 			}
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
-
+			try {
+				int id = scanner.nextInt();
+				newProduct.removeAtID(id);
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input, try again");
+			}
 			break;
 		case "info":
 			usercommand = Commands.INFO;
-			int id = scanner.nextInt();
-			newProduct.searchID(id);
 			break;
 		case "quit":
 			usercommand = Commands.QUIT;
@@ -84,13 +87,13 @@ public class Main implements Serializable {
 		
 		newProduct.initializeBookList();
 		
-//		while (runprogram) {
-//			// TEST
-//			System.out.println("enter command");
-//			String useroption = scanner.next();
-//			option(useroption);
-//			//	
-//		}
+		while (runprogram) {
+			// TEST
+			System.out.println("enter command");
+			String useroption = scanner.next();
+			option(useroption);
+			//	
+		}
 	}
 
 }
