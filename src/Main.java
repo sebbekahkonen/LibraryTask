@@ -95,24 +95,24 @@ public class Main implements Serializable {
 		
 		newProduct.initializeCustomerList();
 		
-		newProduct.customer.customerList.clear();
-		newProduct.saveCustomerList();
-		newProduct.unAvailableProducts.clear();
-		newProduct.saveUnAvailableProductsList();
+//		newProduct.customer.customerList.clear();
+//		newProduct.saveCustomerList();
+//		newProduct.unAvailableProducts.clear();
+//		newProduct.saveUnAvailableProductsList();
 		
-//		newProduct.initializeIdList();
-//
-//		newProduct.initializeMovieList();
-//		
-//		newProduct.initializeBookList();
-//		
-//		while (runprogram) {
-//			// TEST
-//			System.out.println("enter command");
-//			String useroption = scanner.nextLine();
-//			option(useroption);
-//			//	
-//		}
+		newProduct.initializeIdList();
+
+		newProduct.initializeMovieList();
+		
+		newProduct.initializeBookList();
+		
+		while (runprogram) {
+			// TEST
+			System.out.println("enter command");
+			String useroption = scanner.nextLine();
+			option(useroption);
+			//	
+		}
 		
 		
 	}

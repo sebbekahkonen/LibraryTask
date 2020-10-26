@@ -130,7 +130,7 @@ public class Product implements Serializable {
 						System.out.print("Enter phonenumber: ");
 						number = scanner.nextLine();
 						for (Customer customer : customer.customerList)	{
-							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
+							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number))	{
 								customer.borrowedProducts.add(id);
 								unAvailableProducts.add(id);
 								saveCustomerList();
@@ -164,7 +164,7 @@ public class Product implements Serializable {
 						System.out.print("Enter phonenumber: ");
 						number = scanner.nextLine();
 						for (Customer customer : customer.customerList)	{
-							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
+							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number))	{
 								customer.borrowedProducts.add(id);
 								unAvailableProducts.add(id);
 								saveCustomerList();
@@ -200,6 +200,7 @@ public class Product implements Serializable {
 
 	public void getBooksAndMovies() {
 		List<String> printList = new ArrayList<String>();
+		printList.clear();
 		for (Book book : books)		{
 			for (Customer customer : customer.customerList)	{
 				if (customer.borrowedProducts.contains(book.id))	{
