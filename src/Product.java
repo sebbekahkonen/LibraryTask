@@ -16,6 +16,7 @@ public class Product implements Serializable {
 	private static final int serialVersionUID = 136420;
 	protected Book book;
 	protected Movie movie;
+	protected Customer customer;
 	protected final Scanner scanner = new Scanner(System.in);
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
@@ -107,6 +108,46 @@ public class Product implements Serializable {
 			for (Movie movie : movies)	{
 				if (movie.id == id)	{
 					System.out.println(movie.getMoviesString());
+				}
+			}
+		}
+	}
+	public void searchAndBorrow(int id) {
+		if (!(saveid.contains(id)))	{
+			System.out.println("Product with ID: " + id + " does not exist, try again.");
+			return;
+		}
+		String targetId = Integer.toString(id);
+		char firstInTarget = targetId.charAt(0);
+		if (firstInTarget == '1')	{
+			for (Book book : books)	{
+				if (book.id == id)	{
+					if(!unAvalibleProducts.contains(id)){
+						System.out.println("Enter name: ");
+						scanner.nextLine();
+						String name = scanner.nextLine();
+						System.out.println("Enter phonenumber: ");
+						int number = scanner.nextInt();
+						if((boolean) customer.contains(name)) {
+							customer.contains(name);
+						}else {
+							customer = new Customer(name, number, unAvalibleProducts);
+						}
+						unAvalibleProducts.add(id);
+						
+					}else {
+						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
+					}
+				}
+			}
+		} else if (firstInTarget == '5')	{
+			for (Movie movie : movies)	{
+				if (movie.id == id)	{
+					if(!unAvalibleProducts.contains(id)){
+						System.out.println();
+					}else {
+						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
+					}
 				}
 			}
 		}

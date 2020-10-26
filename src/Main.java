@@ -36,6 +36,7 @@ public class Main implements Serializable {
 		case "checkout": // Borrow book
 			usercommand = Commands.CHECKOUT;
 			int checkoutID = scanner.nextInt();
+			newProduct.searchAndBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
 
