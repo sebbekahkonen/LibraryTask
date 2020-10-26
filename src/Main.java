@@ -35,6 +35,7 @@ public class Main implements Serializable {
 			break;
 		case "checkout": // Borrow book
 			usercommand = Commands.CHECKOUT;
+			System.out.print("Enter ID of product to checkout:");
 			int checkoutID = scanner.nextInt();
 			newProduct.searchAndBorrow(checkoutID);
 			break;
@@ -93,20 +94,20 @@ public class Main implements Serializable {
 //		newProduct.initializeUnAvailableProductsList();
 //		
 //		newProduct.initializeCustomerList();
-//		
-//		newProduct.initializeIdList();
-//
-//		newProduct.initializeMovieList();
-//		
-//		newProduct.initializeBookList();
-//		
-//		while (runprogram) {
-//			// TEST
-//			System.out.println("enter command");
-//			String useroption = scanner.next();
-//			option(useroption);
-//			//	
-//		}
+		
+		newProduct.initializeIdList();
+
+		newProduct.initializeMovieList();
+		
+		newProduct.initializeBookList();
+		
+		while (runprogram) {
+			// TEST
+			System.out.println("enter command");
+			String useroption = scanner.next();
+			option(useroption);
+			//	
+		}
 		
 		
 	}

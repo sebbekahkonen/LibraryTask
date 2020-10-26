@@ -124,7 +124,7 @@ public class Product implements Serializable {
 				if (book.id == id)	{
 					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
-						
+						scanner.next();
 						String name = scanner.nextLine();
 						System.out.print("Enter phonenumber: ");
 						int number = scanner.nextInt();
@@ -136,9 +136,9 @@ public class Product implements Serializable {
 							} 
 						}	
 							System.out.println("Added new customer");
-							List<Integer> list = new ArrayList<Integer>();
-							list.add(id);
-							customer.customerList.add(new Customer(name, number, list));
+							List<Integer> borrowed = new ArrayList<Integer>();
+							borrowed.add(id);
+							customer.customerList.add(new Customer(name, number, borrowed));
 							
 							unAvailableProducts.add(id);
 						}
@@ -152,8 +152,27 @@ public class Product implements Serializable {
 			for (Movie movie : movies)	{
 				if (movie.id == id)	{
 					if(!unAvailableProducts.contains(id)){
-						System.out.println();
-					}else {
+						System.out.print("Enter name: ");
+						scanner.next();
+						String name = scanner.nextLine();
+						System.out.print("Enter phonenumber: ");
+						int number = scanner.nextInt();
+						for (Customer customer : customer.customerList)	{
+							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
+								customer.borrowedProducts.add(id);
+								System.out.println("Added to existing list");
+								return;
+							} 
+						}	
+							System.out.println("Added new customer");
+							List<Integer> borrowed = new ArrayList<Integer>();
+							borrowed.add(id);
+							customer.customerList.add(new Customer(name, number, borrowed));
+							
+							unAvailableProducts.add(id);
+						}
+					
+					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
 					}
 				}
