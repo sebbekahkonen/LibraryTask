@@ -20,6 +20,7 @@ public class Product implements Serializable {
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
+	protected static List<Integer> unAvalibleProducts = new ArrayList<Integer>();
 
 	
 
