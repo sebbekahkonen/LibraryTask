@@ -56,6 +56,7 @@ public class Main implements Serializable {
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
 			try {
+				System.out.println("Enter ID of product to remove:");
 				int id = scanner.nextInt();
 				newProduct.removeAtID(id);
 			} catch (InputMismatchException e) {
@@ -64,6 +65,13 @@ public class Main implements Serializable {
 			break;
 		case "info":
 			usercommand = Commands.INFO;
+			try	{
+				System.out.println("Enter ID of product to search for:");
+				int id = scanner.nextInt();
+				newProduct.searchID(id);
+			} catch (InputMismatchException e)	{
+				System.out.println("Invalid input, try again");
+			}
 			break;
 		case "quit":
 			usercommand = Commands.QUIT;

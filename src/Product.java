@@ -90,8 +90,24 @@ public class Product implements Serializable {
 
 	// Search
 	public void searchID(int id) {
-		for (Integer iD : saveid)	{
-			
+		if (!(saveid.contains(id)))	{
+			System.out.println("Product with ID: " + id + " does not exist, try again.");
+			return;
+		}
+		String targetId = Integer.toString(id);
+		char firstInTarget = targetId.charAt(0);
+		if (firstInTarget == '1')	{
+			for (Book book : books)	{
+				if (book.id == id)	{
+					System.out.println(book.getBooksString());
+				}
+			}
+		} else if (firstInTarget == '5')	{
+			for (Movie movie : movies)	{
+				if (movie.id == id)	{
+					System.out.println(movie.getMoviesString());
+				}
+			}
 		}
 	}
 
