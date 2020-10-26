@@ -201,6 +201,14 @@ public class Product implements Serializable {
 	public void getBooksAndMovies() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
+		if (customer.customerList.isEmpty())	{
+			for (Book book : books)	{
+				System.out.println(book.getBooksString());
+			}
+			for (Movie movie : movies)	{
+				System.out.println(movie.getMoviesString());
+			}
+		}
 		for (Book book : books)		{
 			for (Customer customer : customer.customerList)	{
 				if (customer.borrowedProducts.contains(book.id))	{
