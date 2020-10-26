@@ -91,23 +91,28 @@ public class Main implements Serializable {
 	public static void main(String[] args) {
 		
 		
-//		newProduct.initializeUnAvailableProductsList();
+		newProduct.initializeUnAvailableProductsList();
+		
+		newProduct.initializeCustomerList();
+		
+//		newProduct.customer.customerList.clear();
+//		newProduct.saveCustomerList();
+//		newProduct.unAvailableProducts.clear();
+//		newProduct.saveUnAvailableProductsList();
+		
+//		newProduct.initializeIdList();
+//
+//		newProduct.initializeMovieList();
 //		
-//		newProduct.initializeCustomerList();
-		
-		newProduct.initializeIdList();
-
-		newProduct.initializeMovieList();
-		
-		newProduct.initializeBookList();
-		
-		while (runprogram) {
-			// TEST
-			System.out.println("enter command");
-			String useroption = scanner.next();
-			option(useroption);
-			//	
-		}
+//		newProduct.initializeBookList();
+//		
+//		while (runprogram) {
+//			// TEST
+//			System.out.println("enter command");
+//			String useroption = scanner.next();
+//			option(useroption);
+//			//	
+//		}
 		
 		
 	}

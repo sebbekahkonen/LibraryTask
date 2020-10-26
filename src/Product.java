@@ -131,6 +131,9 @@ public class Product implements Serializable {
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
+								unAvailableProducts.add(id);
+								saveCustomerList();
+								saveUnAvailableProductsList();
 								System.out.println("Added to existing list");
 								return;
 							} 
@@ -139,10 +142,10 @@ public class Product implements Serializable {
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
 							customer.customerList.add(new Customer(name, number, borrowed));
-							
 							unAvailableProducts.add(id);
+							saveCustomerList();
+							saveUnAvailableProductsList();
 						}
-					
 					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
 					}
@@ -160,6 +163,9 @@ public class Product implements Serializable {
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
+								unAvailableProducts.add(id);
+								saveCustomerList();
+								saveUnAvailableProductsList();
 								System.out.println("Added to existing list");
 								return;
 							} 
@@ -168,10 +174,10 @@ public class Product implements Serializable {
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
 							customer.customerList.add(new Customer(name, number, borrowed));
-							
 							unAvailableProducts.add(id);
+							saveCustomerList();
+							saveUnAvailableProductsList();
 						}
-					
 					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
 					}
@@ -188,10 +194,30 @@ public class Product implements Serializable {
 	}
 
 	public void getBooksAndMovies() {
-		for (Book book : books)
-			System.out.println(book.getBooksString());
-		for (Movie movie : movies)
-			System.out.println(movie.getMoviesString());
+		List<String> printList = new ArrayList<String>();
+		for (Book book : books)		{
+			for (Customer customer : customer.customerList)	{
+				if (customer.borrowedProducts.contains(book.id))	{
+					String bookBorrowed = book.getBooksString() + "\n\t\tis borrowed by " + customer.getCustomer();
+					printList.add(bookBorrowed);
+				} else	{
+					printList.add(book.getBooksString());
+				}
+			}
+		}	
+		for (Movie movie : movies)	{
+			for (Customer customer : customer.customerList)	{
+				if (customer.borrowedProducts.contains(movie.id))	{
+					String movieBorrowed = movie.getMoviesString() + "\n\t\tis borrowed by " + customer.getCustomer();
+					printList.add(movieBorrowed);
+				} else	{
+					printList.add(movie.getMoviesString());
+				}
+			}
+		}
+		for (String str : printList)	{
+			System.out.println(str);
+		}
 	}
 	// Remove
 	public void removeAtID(int id) {
@@ -327,7 +353,9 @@ public class Product implements Serializable {
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			customer.customerList = (List<Customer>) oin.readObject();
 			oin.close();
-			System.out.println(customer.customerList);
+			for (Customer customer : customer.customerList)	{
+				System.out.println(customer.getCustomer());
+			}
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

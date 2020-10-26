@@ -15,7 +15,8 @@ public class Customer implements Serializable {
 		this.borrowedProducts = list;
 	}
 	public String getCustomer() {
-		return String.format("Name: %s, number: %s", name, number);
+		String customerString = "Name: " + this.name + " Number: " + this.number;
+		return customerString;
 	}
 
 	public Object contains(String name) {						//Vad gör denna metod?
