@@ -123,19 +123,27 @@ public class Product implements Serializable {
 			for (Book book : books)	{
 				if (book.id == id)	{
 					if(!unAvalibleProducts.contains(id)){
-						System.out.println("Enter name: ");
-						scanner.nextLine();
-						String name = scanner.nextLine();
-						System.out.println("Enter phonenumber: ");
-						int number = scanner.nextInt();
-						if((boolean) customer.contains(name)) {
-							customer.contains(name);
-						}else {
-							customer = new Customer(name, number, unAvalibleProducts);
-						}
-						unAvalibleProducts.add(id);
+						System.out.print("Enter name: ");
 						
-					}else {
+						String name = scanner.nextLine();
+						System.out.print("Enter phonenumber: ");
+						int number = scanner.nextInt();
+						for (Customer customer : customer.customerList)	{
+							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
+								customer.borrowedProducts.add(id);
+								System.out.println("Added to existing list");
+								return;
+							} 
+						}	
+							System.out.println("Added new customer");
+							List<Integer> list = new ArrayList<Integer>();
+							list.add(id);
+							customer.customerList.add(new Customer(name, number, list));
+							
+							unAvalibleProducts.add(id);
+						}
+					
+					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
 					}
 				}
