@@ -55,8 +55,15 @@ public class Product implements Serializable {
 				movies.add(movie = new Movie(id, title, value, duration, raiting));
 				saveid.add(id);
 			} else if (c == 'b') {
-				System.out.print("Enter id: ");
-				int id = scanner.nextInt();
+				int id;
+				String idString;
+				char firstInt;
+				do	{
+				System.out.print("(Id for book should start with \'1\') Enter id: ");
+				id = scanner.nextInt();
+				idString =Integer.toString(id);
+				firstInt = idString.charAt(0);
+				} while (firstInt != '1');
 				System.out.print("title: ");
 				scanner.nextLine();
 				String title = scanner.nextLine();
