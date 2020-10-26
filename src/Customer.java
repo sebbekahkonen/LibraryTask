@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public class Customer implements Serializable {
+	private static final int serialVersionUID = 136420;
 	protected static List<Customer> customerList = new ArrayList<Customer>();
 	protected String name;
 	protected int number;

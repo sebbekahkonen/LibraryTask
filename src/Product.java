@@ -21,7 +21,7 @@ public class Product implements Serializable {
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
-	protected static List<Integer> unAvalibleProducts = new ArrayList<Integer>();
+	protected static List<Integer> unAvailableProducts = new ArrayList<Integer>();
 
 	
 
@@ -122,7 +122,7 @@ public class Product implements Serializable {
 		if (firstInTarget == '1')	{
 			for (Book book : books)	{
 				if (book.id == id)	{
-					if(!unAvalibleProducts.contains(id)){
+					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
 						
 						String name = scanner.nextLine();
@@ -140,7 +140,7 @@ public class Product implements Serializable {
 							list.add(id);
 							customer.customerList.add(new Customer(name, number, list));
 							
-							unAvalibleProducts.add(id);
+							unAvailableProducts.add(id);
 						}
 					
 					else {
@@ -151,7 +151,7 @@ public class Product implements Serializable {
 		} else if (firstInTarget == '5')	{
 			for (Movie movie : movies)	{
 				if (movie.id == id)	{
-					if(!unAvalibleProducts.contains(id)){
+					if(!unAvailableProducts.contains(id)){
 						System.out.println();
 					}else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
@@ -280,6 +280,82 @@ public class Product implements Serializable {
 		}
 	}
 	
+	public void initializeUnAvailableProductsList()	{
+		try {
+			File file = new File("unavailableproducts_list.bin");
+			FileInputStream fin = new FileInputStream(file);
+			ObjectInputStream oin = new ObjectInputStream(fin);
+			unAvailableProducts = (List<Integer>) oin.readObject();
+			oin.close();
+			System.out.println(unAvailableProducts);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void initializeCustomerList()	{
+		try {
+			File file = new File("customer_list.bin");
+			FileInputStream fin = new FileInputStream(file);
+			ObjectInputStream oin = new ObjectInputStream(fin);
+			customer.customerList = (List<Customer>) oin.readObject();
+			oin.close();
+			System.out.println(customer.customerList);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveCustomerList() {
+		File file = new File("customer_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(customer.customerList);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveUnAvailableProductsList() {
+		File file = new File("unavailableproducts_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(unAvailableProducts);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	public static void saveBookList() {
 		File file = new File("book_list.bin");
@@ -296,7 +372,6 @@ public class Product implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	public static void saveIdList() {
@@ -314,7 +389,6 @@ public class Product implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	public static void saveMovieList() {
@@ -332,7 +406,6 @@ public class Product implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }
