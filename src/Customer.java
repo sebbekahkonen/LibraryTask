@@ -19,7 +19,7 @@ public class Customer implements Serializable {
 		return customerString;
 	}
 
-	public Object contains(String name) {						//Vad gör denna metod?
+	public Object contains(String name) {						
 		String[] splitCustomer = null;							
 		for(Customer customer : customerList) {
 			splitCustomer = customer.getCustomer().split(",");

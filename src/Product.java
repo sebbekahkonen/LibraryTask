@@ -122,12 +122,14 @@ public class Product implements Serializable {
 		if (firstInTarget == '1')	{
 			for (Book book : books)	{
 				if (book.id == id)	{
+					String name;
+					int number;
 					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
 						scanner.next();
-						String name = scanner.nextLine();
+						name = scanner.nextLine();
 						System.out.print("Enter phonenumber: ");
-						int number = scanner.nextInt();
+						number = scanner.nextInt();
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
@@ -154,12 +156,14 @@ public class Product implements Serializable {
 		} else if (firstInTarget == '5')	{
 			for (Movie movie : movies)	{
 				if (movie.id == id)	{
+					String name;
+					int number;
 					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
 						scanner.next();
-						String name = scanner.nextLine();
+						name = scanner.nextLine();
 						System.out.print("Enter phonenumber: ");
-						int number = scanner.nextInt();
+						number = scanner.nextInt();
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
