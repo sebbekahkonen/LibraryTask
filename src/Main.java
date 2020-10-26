@@ -82,7 +82,7 @@ public class Main implements Serializable {
 		
 		
 		newProduct.initializeIdList();
-		
+
 		newProduct.initializeMovieList();
 		
 		newProduct.initializeBookList();
@@ -94,6 +94,8 @@ public class Main implements Serializable {
 			option(useroption);
 			//	
 		}
+		
+		
 	}
 
 }

@@ -54,6 +54,8 @@ public class Product implements Serializable {
 				}
 				movies.add(movie = new Movie(id, title, value, duration, raiting));
 				saveid.add(id);
+				saveIdList();
+				saveMovieList();
 			} else if (c == 'b') {
 				int id;
 				String idString;
@@ -76,6 +78,8 @@ public class Product implements Serializable {
 				String publisher = scanner.next();
 				books.add(book = new Book(id, title, value, pages, publisher));
 				saveid.add(id);
+				saveIdList();
+				saveBookList();
 			} else {
 				System.out.println("sorry that char isnt valid");
 			}
@@ -116,7 +120,11 @@ public class Product implements Serializable {
 				String targetSplit = target.getMoviesString().split(",")[0];
 				if (targetSplit.equals(id2)) {
 					iterMovies.remove();
+					Integer removeId = Integer.parseInt(targetSplit);
+					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
+					saveMovieList();
+					saveIdList();
 				}
 			}
 
@@ -127,11 +135,15 @@ public class Product implements Serializable {
 				String target2Split = target2.getBooksString().split(",")[0];
 				if (target2Split.equals(id2)) {
 					iterBooks.remove();
+					Integer removeId = Integer.parseInt(target2Split);
+					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target2.getTitle() + "\"");
+					saveBookList();
+					saveIdList();
 				}
 			}
 		} else if (saveid.contains(id) == false) {
-			System.out.println("Book or Movie with \"" + id + "\" does not exist");
+			System.out.println("Book or Movie with id \"" + id + "\" does not exist");
 		}
 		if (movies.isEmpty() == true && books.isEmpty() == true) {
 			System.out.println("There are no \"books\" or \"movies\" in the library to remove");
@@ -210,6 +222,42 @@ public class Product implements Serializable {
 			fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
 			out.writeObject(books);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public static void saveIdList() {
+		File file = new File("id_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(saveid);
+			out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public static void saveMovieList() {
+		File file = new File("movie_list.bin");
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(movies);
 			out.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
