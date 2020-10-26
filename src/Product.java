@@ -123,13 +123,12 @@ public class Product implements Serializable {
 			for (Book book : books)	{
 				if (book.id == id)	{
 					String name;
-					int number;
+					String number;
 					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
-						scanner.next();
 						name = scanner.nextLine();
 						System.out.print("Enter phonenumber: ");
-						number = scanner.nextInt();
+						number = scanner.nextLine();
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
@@ -140,10 +139,11 @@ public class Product implements Serializable {
 								return;
 							} 
 						}	
-							System.out.println("Added new customer");
+							System.out.println("Added name:	" + name + " number: " + number);
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
-							customer.customerList.add(new Customer(name, number, borrowed));
+							Customer c1 = new Customer(name, number, borrowed);
+							customer.customerList.add(c1);
 							unAvailableProducts.add(id);
 							saveCustomerList();
 							saveUnAvailableProductsList();
@@ -157,13 +157,12 @@ public class Product implements Serializable {
 			for (Movie movie : movies)	{
 				if (movie.id == id)	{
 					String name;
-					int number;
+					String number;
 					if(!unAvailableProducts.contains(id)){
 						System.out.print("Enter name: ");
-						scanner.next();
 						name = scanner.nextLine();
 						System.out.print("Enter phonenumber: ");
-						number = scanner.nextInt();
+						number = scanner.nextLine();
 						for (Customer customer : customer.customerList)	{
 							if (customer.name.equalsIgnoreCase(name) && customer.number == number)	{
 								customer.borrowedProducts.add(id);
@@ -174,10 +173,12 @@ public class Product implements Serializable {
 								return;
 							} 
 						}	
-							System.out.println("Added new customer");
+							
+							System.out.println("Added Name: " + name + "  number: " + number);
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
-							customer.customerList.add(new Customer(name, number, borrowed));
+							Customer c1 = new Customer(name, number, borrowed);
+							customer.customerList.add(c1);
 							unAvailableProducts.add(id);
 							saveCustomerList();
 							saveUnAvailableProductsList();

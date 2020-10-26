@@ -6,14 +6,15 @@ public class Customer implements Serializable {
 	private static final int serialVersionUID = 136420;
 	protected static List<Customer> customerList = new ArrayList<Customer>();
 	protected String name;
-	protected int number;
+	protected String number;
 	protected List<Integer> borrowedProducts = new ArrayList<Integer>();
 	
-	public Customer(String name, int number, List list) {
+	public Customer(String name, String number, List list) {
 		this.name = name;
 		this.number = number;
 		this.borrowedProducts = list;
 	}
+	
 	public String getCustomer() {
 		String customerString = "Name: " + this.name + " Number: " + this.number;
 		return customerString;
