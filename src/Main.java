@@ -29,7 +29,7 @@ public class Main implements Serializable {
 	static Commands option(String options) {
 		Commands usercommand = null;
 		switch (options) {
-		case "list":
+		case "list": //See all products
 			usercommand = Commands.LIST;
 			newProduct.getBooksAndMovies();
 			break;
@@ -40,14 +40,18 @@ public class Main implements Serializable {
 			newProduct.searchAndBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
-
 			usercommand = Commands.CHECKIN;
+			try {
+				System.out.println("Enter ID of product to return:");
+				int id = scanner.nextInt();
+				newProduct.searchAndReturn(id);
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input, try again");
+			}
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
-
 			System.out.println("Enter \"b\" for book or \"m\" for movie");
-
 			try {
 			char c = scanner.next(".").charAt(0);
 				newProduct.dialogue(c);
@@ -65,7 +69,7 @@ public class Main implements Serializable {
 				System.out.println("Invalid input, try again");
 			}
 			break;
-		case "info":
+		case "info": //Info for product
 			usercommand = Commands.INFO;
 			try	{
 				System.out.println("Enter ID of product to search for:");
@@ -75,7 +79,7 @@ public class Main implements Serializable {
 				System.out.println("Invalid input, try again");
 			}
 			break;
-		case "quit":
+		case "quit": //Quit program
 			usercommand = Commands.QUIT;
 			System.exit(0);
 			break;
@@ -95,10 +99,10 @@ public class Main implements Serializable {
 		
 		newProduct.initializeCustomerList();
 		
-//		newProduct.customer.customerList.clear();
-//		newProduct.saveCustomerList();
-//		newProduct.unAvailableProducts.clear();
-//		newProduct.saveUnAvailableProductsList();
+		newProduct.customer.customerList.clear();
+		newProduct.saveCustomerList();
+		newProduct.unAvailableProducts.clear();
+		newProduct.saveUnAvailableProductsList();
 		
 		newProduct.initializeIdList();
 
@@ -108,8 +112,9 @@ public class Main implements Serializable {
 		
 		while (runprogram) {
 			// TEST
+			String useroption;
 			System.out.println("enter command");
-			String useroption = scanner.nextLine();
+			useroption = scanner.nextLine();
 			option(useroption);
 			//	
 		}

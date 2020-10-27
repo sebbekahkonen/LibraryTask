@@ -23,12 +23,8 @@ public class Product implements Serializable {
 	protected static List<Integer> saveid = new ArrayList<Integer>();
 	protected static List<Integer> unAvailableProducts = new ArrayList<Integer>();
 
-	
-
 	public Product() {
-
 	}
-
 	// Dialogues
 	public void dialogue(char c) {
 		try {
@@ -112,6 +108,34 @@ public class Product implements Serializable {
 			}
 		}
 	}
+	public void searchAndReturn(int id) {
+//		String targetId = Integer.toString(id);
+		if(unAvailableProducts.contains(id)) {
+			for(Integer product : unAvailableProducts) {
+				if(product == id) {
+				break;
+				}
+			}
+			unAvailableProducts.remove(Integer.valueOf(id));
+		}
+		else {
+			System.out.println(""+id+" doesnt exist");
+		}
+		
+		Iterator<Customer> iter = customer.customerList.iterator();
+		while(iter.hasNext()) {
+			Customer target = iter.next();
+			if(target.borrowedProducts.contains(id)) {
+				target.borrowedProducts.remove(Integer.valueOf(id));
+				System.out.println("you have successfully returned "+id+"");
+				return;
+			}
+			if(!iter.hasNext()) {
+				System.out.println("there is no such product in \""+target.name+"\" list");
+			}
+		}
+			
+	}
 	public void searchAndBorrow(int id) {
 		if (!(saveid.contains(id)))	{
 			System.out.println("Product with ID: " + id + " does not exist, try again.");
@@ -190,14 +214,12 @@ public class Product implements Serializable {
 			}
 		}
 	}
-
 	// Getters
 	public void getID() {
 		for (int id : saveid) {
 			System.out.println(id);
 		}
 	}
-
 	public void getBooksAndMovies() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
@@ -274,6 +296,7 @@ public class Product implements Serializable {
 			System.out.println("There are no \"books\" or \"movies\" in the library to remove");
 		}
 	}
+	//Initializers
 	public static void initializeBookList() {
 		try {
 			File file = new File("book_list.bin");
@@ -295,7 +318,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void initializeMovieList()	{
 		try {
 			File file = new File("movie_list.bin");
@@ -317,7 +339,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void initializeIdList()	{
 		try {
 			File file = new File("id_list.bin");
@@ -338,7 +359,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public void initializeUnAvailableProductsList()	{
 		try {
 			File file = new File("unavailableproducts_list.bin");
@@ -359,7 +379,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public void initializeCustomerList()	{
 		try {
 			File file = new File("customer_list.bin");
@@ -382,7 +401,7 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+	//SaveAll
 	public void saveCustomerList() {
 		File file = new File("customer_list.bin");
 		FileOutputStream fout;
@@ -399,7 +418,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public void saveUnAvailableProductsList() {
 		File file = new File("unavailableproducts_list.bin");
 		FileOutputStream fout;
@@ -416,8 +434,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-
 	public static void saveBookList() {
 		File file = new File("book_list.bin");
 		FileOutputStream fout;
@@ -434,7 +450,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void saveIdList() {
 		File file = new File("id_list.bin");
 		FileOutputStream fout;
@@ -451,7 +466,6 @@ public class Product implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void saveMovieList() {
 		File file = new File("movie_list.bin");
 		FileOutputStream fout;
