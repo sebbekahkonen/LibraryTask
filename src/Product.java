@@ -17,6 +17,7 @@ public class Product implements Serializable {
 	protected Book book;
 	protected Movie movie;
 	protected Customer customer;
+	protected Savers save;
 	protected final Scanner scanner = new Scanner(System.in);
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
@@ -52,8 +53,8 @@ public class Product implements Serializable {
 				}
 				movies.add(movie = new Movie(id, title, value, duration, raiting));
 				saveid.add(id);
-				saveIdList();
-				saveMovieList();
+				save.saveIdList();
+				save.saveMovieList();
 			} else if (c == 'b') {
 				int id;
 				String idString;
@@ -76,8 +77,8 @@ public class Product implements Serializable {
 				String publisher = scanner.next();
 				books.add(book = new Book(id, title, value, pages, publisher));
 				saveid.add(id);
-				saveIdList();
-				saveBookList();
+				save.saveIdList();
+				save.saveBookList();
 			} else {
 				System.out.println("sorry that char isnt valid");
 			}
@@ -120,6 +121,7 @@ public class Product implements Serializable {
 		}
 		else {
 			System.out.println(""+id+" doesnt exist");
+			return;
 		}
 		
 		Iterator<Customer> iter = customer.customerList.iterator();
@@ -132,6 +134,7 @@ public class Product implements Serializable {
 			}
 			if(!iter.hasNext()) {
 				System.out.println("there is no such product in \""+target.name+"\" list");
+				break;
 			}
 		}
 			
@@ -157,8 +160,8 @@ public class Product implements Serializable {
 							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number))	{
 								customer.borrowedProducts.add(id);
 								unAvailableProducts.add(id);
-								saveCustomerList();
-								saveUnAvailableProductsList();
+								save.saveCustomerList();
+								save.saveUnAvailableProductsList();
 								System.out.println("Added to existing list");
 								return;
 							} 
@@ -169,8 +172,8 @@ public class Product implements Serializable {
 							Customer c1 = new Customer(name, number, borrowed);
 							customer.customerList.add(c1);
 							unAvailableProducts.add(id);
-							saveCustomerList();
-							saveUnAvailableProductsList();
+							save.saveCustomerList();
+							save.saveUnAvailableProductsList();
 						}
 					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
@@ -191,8 +194,8 @@ public class Product implements Serializable {
 							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number))	{
 								customer.borrowedProducts.add(id);
 								unAvailableProducts.add(id);
-								saveCustomerList();
-								saveUnAvailableProductsList();
+								save.saveCustomerList();
+								save.saveUnAvailableProductsList();
 								System.out.println("Added to existing list");
 								return;
 							} 
@@ -204,8 +207,8 @@ public class Product implements Serializable {
 							Customer c1 = new Customer(name, number, borrowed);
 							customer.customerList.add(c1);
 							unAvailableProducts.add(id);
-							saveCustomerList();
-							saveUnAvailableProductsList();
+							save.saveCustomerList();
+							save.saveUnAvailableProductsList();
 						}
 					else {
 						System.out.println("Product with ID: \""+id+"\" is already borrowed out");
@@ -270,8 +273,8 @@ public class Product implements Serializable {
 					Integer removeId = Integer.parseInt(targetSplit);
 					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
-					saveMovieList();
-					saveIdList();
+					save.saveMovieList();
+					save.saveIdList();
 				}
 			}
 
@@ -285,8 +288,8 @@ public class Product implements Serializable {
 					Integer removeId = Integer.parseInt(target2Split);
 					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target2.getTitle() + "\"");
-					saveBookList();
-					saveIdList();
+					save.saveBookList();
+					save.saveIdList();
 				}
 			}
 		} else if (saveid.contains(id) == false) {
@@ -296,192 +299,199 @@ public class Product implements Serializable {
 			System.out.println("There are no \"books\" or \"movies\" in the library to remove");
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
 	//Initializers
-	public static void initializeBookList() {
-		try {
-			File file = new File("book_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			books = (List<Book>) oin.readObject();
-			oin.close();
-			for (Book book : books) {
-				System.out.println(book.getBooksString());
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static void initializeMovieList()	{
-		try {
-			File file = new File("movie_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			movies = (List<Movie>) oin.readObject();
-			oin.close();
-			for (Movie movie : movies) {
-				System.out.println(movie.getMoviesString());
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static void initializeIdList()	{
-		try {
-			File file = new File("id_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			saveid = (List<Integer>) oin.readObject();
-			oin.close();
-			System.out.println(saveid);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void initializeUnAvailableProductsList()	{
-		try {
-			File file = new File("unavailableproducts_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			unAvailableProducts = (List<Integer>) oin.readObject();
-			oin.close();
-			System.out.println(unAvailableProducts);
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void initializeCustomerList()	{
-		try {
-			File file = new File("customer_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			customer.customerList = (List<Customer>) oin.readObject();
-			oin.close();
-			for (Customer customer : customer.customerList)	{
-				System.out.println(customer.getCustomer());
-			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void initializeBookList() {
+//		try {
+//			File file = new File("book_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			books = (List<Book>) oin.readObject();
+//			oin.close();
+//			for (Book book : books) {
+//				System.out.println(book.getBooksString());
+//			}
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public static void initializeMovieList()	{
+//		try {
+//			File file = new File("movie_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			movies = (List<Movie>) oin.readObject();
+//			oin.close();
+//			for (Movie movie : movies) {
+//				System.out.println(movie.getMoviesString());
+//			}
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public static void initializeIdList()	{
+//		try {
+//			File file = new File("id_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			saveid = (List<Integer>) oin.readObject();
+//			oin.close();
+//			System.out.println(saveid);
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public void initializeUnAvailableProductsList()	{
+//		try {
+//			File file = new File("unavailableproducts_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			unAvailableProducts = (List<Integer>) oin.readObject();
+//			oin.close();
+//			System.out.println(unAvailableProducts);
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public void initializeCustomerList()	{
+//		try {
+//			File file = new File("customer_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			customer.customerList = (List<Customer>) oin.readObject();
+//			oin.close();
+//			for (Customer customer : customer.customerList)	{
+//				System.out.println(customer.getCustomer());
+//			}
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	//SaveAll
-	public void saveCustomerList() {
-		File file = new File("customer_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(customer.customerList);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void saveUnAvailableProductsList() {
-		File file = new File("unavailableproducts_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(unAvailableProducts);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static void saveBookList() {
-		File file = new File("book_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(books);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static void saveIdList() {
-		File file = new File("id_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(saveid);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static void saveMovieList() {
-		File file = new File("movie_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(movies);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void saveCustomerList() {
+//		File file = new File("customer_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(customer.customerList);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public void saveUnAvailableProductsList() {
+//		File file = new File("unavailableproducts_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(unAvailableProducts);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public static void saveBookList() {
+//		File file = new File("book_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(books);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public static void saveIdList() {
+//		File file = new File("id_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(saveid);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	public static void saveMovieList() {
+//		File file = new File("movie_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(movies);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }
 	

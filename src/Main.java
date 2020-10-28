@@ -15,7 +15,8 @@ public class Main implements Serializable {
 	static boolean runprogram = true;
 	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct = new Product();
-
+	static Initializers init = new Initializers();
+	static Savers save = new Savers();
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -90,15 +91,26 @@ public class Main implements Serializable {
 		return usercommand;
 	}
 	
-	
 
 	public static void main(String[] args) {
 		
+		//Test
+		init.initializeUnAvailableProductsList();
+		init.initializeCustomerList();
+		init.initializeIdList();
+		init.initializeMovieList();
+		init.initializeBookList();
 		
-		newProduct.initializeUnAvailableProductsList();
+		save.saveCustomerList();
+		save.saveUnAvailableProductsList();
 		
-		newProduct.initializeCustomerList();
 		
+		//Original
+//		newProduct.initializeUnAvailableProductsList();
+//		
+//		newProduct.initializeCustomerList();
+		
+<<<<<<< HEAD
 //		newProduct.customer.customerList.clear();
 //		newProduct.saveCustomerList();
 //		newProduct.unAvailableProducts.clear();
@@ -107,8 +119,18 @@ public class Main implements Serializable {
 		newProduct.initializeIdList();
 
 		newProduct.initializeMovieList();
+=======
+		newProduct.customer.customerList.clear();
+//		newProduct.saveCustomerList();
+		newProduct.unAvailableProducts.clear();
+//		newProduct.saveUnAvailableProductsList();
+>>>>>>> 4c04cb5860136ba426978837a15d303d7d0d80e4
 		
-		newProduct.initializeBookList();
+//		newProduct.initializeIdList();
+//
+//		newProduct.initializeMovieList();
+//		
+//		newProduct.initializeBookList();
 		
 		while (runprogram) {
 			// TEST

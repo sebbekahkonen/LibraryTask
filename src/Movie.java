@@ -16,7 +16,6 @@ public class Movie implements Serializable {
 		this.duration = duration;
 		this.rating = raiting;
 	}
-	
 	public String getMoviesString() {
 		return String.format("%s, (Movie)title: %s, value: %skr, duration: %s minutes, rating: %.1f", 
 				id, title, value, duration, rating);
@@ -27,4 +26,5 @@ public class Movie implements Serializable {
 	public String getMovies() {
 		return id+title+value+duration+rating;
 	}
+	
 }
