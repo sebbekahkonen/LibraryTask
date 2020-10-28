@@ -103,39 +103,39 @@ public class Main implements Serializable {
 		save.saveCustomerList();
 		save.saveUnAvailableProductsList();
 		
-<<<<<<< HEAD
+
 		
 		//Original
 //		newProduct.initializeUnAvailableProductsList();
 //		
 //		newProduct.initializeCustomerList();
 		
-<<<<<<< HEAD
+
 //		newProduct.customer.customerList.clear();
 //		newProduct.saveCustomerList();
 //		newProduct.unAvailableProducts.clear();
 //		newProduct.saveUnAvailableProductsList();
 		
-		newProduct.initializeIdList();
 
-		newProduct.initializeMovieList();
-=======
-=======
->>>>>>> 1789e25a6d6141af6c7dc56c5f731d506cea8268
+
+
+
+
+
 		newProduct.customer.customerList.clear();
 		newProduct.unAvailableProducts.clear();
-<<<<<<< HEAD
+
 //		newProduct.saveUnAvailableProductsList();
->>>>>>> 4c04cb5860136ba426978837a15d303d7d0d80e4
+
 		
 //		newProduct.initializeIdList();
 //
 //		newProduct.initializeMovieList();
 //		
 //		newProduct.initializeBookList();
-=======
 
->>>>>>> 1789e25a6d6141af6c7dc56c5f731d506cea8268
+
+
 		
 		while (runprogram) {
 			// TEST
