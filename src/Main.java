@@ -102,39 +102,9 @@ public class Main implements Serializable {
 		
 		save.saveCustomerList();
 		save.saveUnAvailableProductsList();
-		
-
-		
-		//Original
-//		newProduct.initializeUnAvailableProductsList();
-//		
-//		newProduct.initializeCustomerList();
-		
-
-//		newProduct.customer.customerList.clear();
-//		newProduct.saveCustomerList();
-//		newProduct.unAvailableProducts.clear();
-//		newProduct.saveUnAvailableProductsList();
-		
-
-
-
-
-
 
 		newProduct.customer.customerList.clear();
 		newProduct.unAvailableProducts.clear();
-
-//		newProduct.saveUnAvailableProductsList();
-
-		
-//		newProduct.initializeIdList();
-//
-//		newProduct.initializeMovieList();
-//		
-//		newProduct.initializeBookList();
-
-// Jävla git commit bullshit
 
 		
 		while (runprogram) {
