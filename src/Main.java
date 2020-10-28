@@ -99,10 +99,10 @@ public class Main implements Serializable {
 		
 		newProduct.initializeCustomerList();
 		
-		newProduct.customer.customerList.clear();
-		newProduct.saveCustomerList();
-		newProduct.unAvailableProducts.clear();
-		newProduct.saveUnAvailableProductsList();
+//		newProduct.customer.customerList.clear();
+//		newProduct.saveCustomerList();
+//		newProduct.unAvailableProducts.clear();
+//		newProduct.saveUnAvailableProductsList();
 		
 		newProduct.initializeIdList();
 
