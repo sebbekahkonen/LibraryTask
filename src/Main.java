@@ -94,7 +94,6 @@ public class Main implements Serializable {
 
 	public static void main(String[] args) {
 		
-		//Test
 		init.initializeUnAvailableProductsList();
 		init.initializeCustomerList();
 		init.initializeIdList();
@@ -104,22 +103,9 @@ public class Main implements Serializable {
 		save.saveCustomerList();
 		save.saveUnAvailableProductsList();
 		
-		
-		//Original
-//		newProduct.initializeUnAvailableProductsList();
-//		
-//		newProduct.initializeCustomerList();
-		
 		newProduct.customer.customerList.clear();
-//		newProduct.saveCustomerList();
 		newProduct.unAvailableProducts.clear();
-//		newProduct.saveUnAvailableProductsList();
-		
-//		newProduct.initializeIdList();
-//
-//		newProduct.initializeMovieList();
-//		
-//		newProduct.initializeBookList();
+
 		
 		while (runprogram) {
 			// TEST
