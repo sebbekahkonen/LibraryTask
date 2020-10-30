@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 public class Main implements Serializable {
 	private static final int serialVersionUID = 136420;
 	static boolean runprogram = true;
-	static Scanner scanner = new Scanner(System.in);
 	static Product newProduct = new Product();
-	static Initializers init = new Initializers();
-	static Savers save = new Savers();
+	static InitializersAndSavers saveOrInit = new InitializersAndSavers();
+	
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -29,6 +29,8 @@ public class Main implements Serializable {
 	
 	static Commands option(String options) {
 		Commands usercommand = null;
+		try {
+		Scanner scanner = new Scanner(System.in);
 		switch (options) {
 		case "list": //See all products
 			usercommand = Commands.LIST;
@@ -36,84 +38,68 @@ public class Main implements Serializable {
 			break;
 		case "checkout": // Borrow book
 			usercommand = Commands.CHECKOUT;
-			System.out.print("Enter ID of product to checkout:");
-			int checkoutID = Integer.parseInt(scanner.nextLine());
+			System.out.print("Enter ID of product to checkout: ");
+			int checkoutID = scanner.nextInt();
 			newProduct.searchAndBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
 			usercommand = Commands.CHECKIN;
-			try {
-				System.out.println("Enter ID of product to return:");
-				int id = scanner.nextInt();
-				newProduct.searchAndReturn(id);
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input, try again");
-			}
+			System.out.print("Enter ID of product to return: ");
+			int checkinID = scanner.nextInt();
+			newProduct.searchAndReturn(checkinID);
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
-			System.out.println("Enter \"b\" for book or \"m\" for movie");
-			try {
+			System.out.print("Enter \"b\" for book or \"m\" for movie: ");
 			char c = scanner.next(".").charAt(0);
-				newProduct.dialogue(c);
+			newProduct.registerDialogue(c);
 				break;
-			}catch(InputMismatchException e) {
-				break;
-			}
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
-			try {
-				System.out.println("Enter ID of product to remove:");
-				int id = scanner.nextInt();
-				newProduct.removeAtID(id);
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input, try again");
-			}
+			System.out.print("Enter ID of product to remove: ");
+			int deregisterID = scanner.nextInt();
+			newProduct.removeAtID(deregisterID);
 			break;
 		case "info": //Info for product
 			usercommand = Commands.INFO;
-			try	{
-				System.out.println("Enter ID of product to search for:");
-				int id = scanner.nextInt();
-				newProduct.searchID(id);
-			} catch (InputMismatchException e)	{
-				System.out.println("Invalid input, try again");
-			}
+			System.out.print("Enter ID of product to search for: ");
+			int infoID = scanner.nextInt();
+			newProduct.searchID(infoID);
 			break;
 		case "quit": //Quit program
 			usercommand = Commands.QUIT;
+			System.out.println("Stopping program...");
 			System.exit(0);
 			break;
-		default:
-			System.out.println("Invalid Command, try again");
-			break;
+		}
+		}catch(InputMismatchException e) {
+			System.out.println("Invalid format, try again");
 		}
 		return usercommand;
 	}
-	
 
 	public static void main(String[] args) {
-		
-		init.initializeUnAvailableProductsList();
-		init.initializeCustomerList();
-		init.initializeIdList();
-		init.initializeMovieList();
-		init.initializeBookList();
-		
-		save.saveCustomerList();
-		save.saveUnAvailableProductsList();
-
+		saveOrInit.initializeUnAvailableProductsList();
+		saveOrInit.initializeCustomerList();
+		saveOrInit.initializeIdList();
+		saveOrInit.initializeMovieList();
+		saveOrInit.initializeBookList();
+		saveOrInit.saveCustomerList();
+		saveOrInit.saveUnAvailableProductsList();
 		newProduct.customer.customerList.clear();
 		newProduct.unAvailableProducts.clear();
 
-		
 		while (runprogram) {
-			// TEST
-			String useroption;
+			Scanner useroption = new Scanner(System.in);
+			String usercommand;
 			System.out.println("enter command");
-			useroption = scanner.nextLine();
-			option(useroption);
-			//	
+			usercommand = useroption.next();
+			if(Pattern.matches("[a-z]{4,10}", usercommand)){
+				runprogram = true;
+				option(usercommand);
+			}else {
+				System.out.println("Sorry that's not a command");
+			}
 		}
 		
 		

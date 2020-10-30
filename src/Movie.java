@@ -23,8 +23,4 @@ public class Movie implements Serializable {
 	public String getTitle() {
 		return String.format("%s", title);
 	}
-	public String getMovies() {
-		return id+title+value+duration+rating;
-	}
-	
 }
