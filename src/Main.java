@@ -15,7 +15,7 @@ public class Main implements Serializable {
 	private static final int serialVersionUID = 136420;
 	static boolean runprogram = true;
 	static Product newProduct = new Product();
-	static InitializersAndSavers saveOrInit = new InitializersAndSavers();
+	
 	
 	enum Commands {
 		LIST,
@@ -79,15 +79,15 @@ public class Main implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		saveOrInit.initializeUnAvailableProductsList();
-		saveOrInit.initializeCustomerList();
-		saveOrInit.initializeIdList();
-		saveOrInit.initializeMovieList();
-		saveOrInit.initializeBookList();
-		saveOrInit.saveCustomerList();
-		saveOrInit.saveUnAvailableProductsList();
-//		newProduct.customer.customerList.clear();
-//		newProduct.unAvailableProducts.clear();
+		newProduct.saveOrInit.initializeUnAvailableProductsList();
+		newProduct.saveOrInit.initializeCustomerList();
+		newProduct.saveOrInit.initializeIdList();
+		newProduct.saveOrInit.initializeMovieList();
+		newProduct.saveOrInit.initializeBookList();
+		newProduct.saveOrInit.saveCustomerList();
+		newProduct.saveOrInit.saveUnAvailableProductsList();
+		newProduct.customer.customerList.clear();
+		newProduct.unAvailableProducts.clear();
 
 		while (runprogram) {
 			Scanner useroption = new Scanner(System.in);

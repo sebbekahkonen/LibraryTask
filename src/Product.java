@@ -17,7 +17,7 @@ public class Product implements Serializable {
 	protected Book book;
 	protected Movie movie;
 	protected Customer customer;
-	protected InitializersAndSavers saveOrInit;
+	protected static InitializersAndSavers saveOrInit = new InitializersAndSavers();
 	protected static List<Movie> movies = new ArrayList<Movie>();
 	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Integer> saveid = new ArrayList<Integer>();
@@ -162,7 +162,7 @@ public class Product implements Serializable {
 
 	}
 	public void searchAndBorrow(int id) {
-		saveOrInit = new InitializersAndSavers();
+//		saveOrInit = new InitializersAndSavers();
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
