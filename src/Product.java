@@ -38,7 +38,7 @@ public class Product implements Serializable {
 				char firstInt = 0;
 				double rating;
 				do	{
-				System.out.print("(id for movie should start with\'5\') Enter id: ");
+				System.out.print("(id for movie should start with\'5\') Enter id:\n>");
 				id = Integer.parseInt(userinput.nextLine());
 				if(saveid.contains(id)) {
 					System.out.println("Product with id: \""+id+"\" already exists");
@@ -47,17 +47,17 @@ public class Product implements Serializable {
 				idString = Integer.toString(id);
 				firstInt = idString.charAt(0);
 				} while (firstInt != '5');
-				System.out.print("Enter title: ");
+				System.out.print("Enter title:\n>");
 				String title = userinput.nextLine();
-				System.out.print("Enter value: ");
+				System.out.print("Enter value:\n>");
 				int value = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter duration: (minutes)");
+				System.out.print("Enter duration: (minutes)\n>");
 				int duration = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter rating: ");
+				System.out.print("Enter rating:\n>");
 				do	{
 					rating = Double.parseDouble(userinput.nextLine());
 					if (rating > 10 || rating < 0) {
-						System.out.println("Rating should be between 0.0 and 10.0");
+						System.out.println("Rating should be between 0.0 and 10.0\n>");
 					}
 				} while (rating < 0 && rating > 10);
 				movies.add(movie = new Movie(id, title, value, duration, rating));
@@ -70,7 +70,7 @@ public class Product implements Serializable {
 				String idString = null;
 				char firstInt = 0;
 				do	{
-				System.out.print("(Id for book should start with \'1\') Enter id: ");
+				System.out.print("(Id for book should start with \'1\') Enter id:\n>");
 				id = Integer.parseInt(userinput.nextLine());
 				if(saveid.contains(id)) {
 					System.out.println("Product with id: \""+id+"\" already exists");
@@ -79,13 +79,13 @@ public class Product implements Serializable {
 				idString =Integer.toString(id);
 				firstInt = idString.charAt(0);
 				} while (firstInt != '1');
-				System.out.print("title: ");
+				System.out.print("title:\n>");
 				String title = userinput.nextLine();
-				System.out.print("Enter value: ");
+				System.out.print("Enter value:\n>");
 				int value = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter pages: ");
+				System.out.print("Enter pages:\n>");
 				int pages = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter author: ");
+				System.out.print("Enter author:\n>");
 				String publisher = userinput.nextLine();
 				books.add(book = new Book(id, title, value, pages, publisher));
 				Collections.sort(books, Comparator.comparing(Book::getId));
@@ -186,9 +186,9 @@ public class Product implements Serializable {
 						String name;
 						String number;
 						if (!unAvailableProducts.contains(id)) {
-							System.out.print("Enter name: ");
+							System.out.print("Enter name:\n>");
 							name = inputScanner.nextLine();
-							System.out.print("Enter phonenumber: ");
+							System.out.print("Enter phonenumber:\n>");
 							number = inputScanner.nextLine();
 							for (Customer customer : customer.customerList) {
 								if (customer.name.toLowerCase().equalsIgnoreCase(name)
@@ -201,7 +201,7 @@ public class Product implements Serializable {
 									return;
 								}
 							}
-							System.out.println("Added name:	" + name + " number: " + number);
+							System.out.println("Added name: "+name+", number: " + number);
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
 							Customer c1 = new Customer(name, number, borrowed);
@@ -220,9 +220,9 @@ public class Product implements Serializable {
 						String name;
 						String number;
 						if (!unAvailableProducts.contains(id)) {
-							System.out.print("Enter name: ");
+							System.out.print("Enter name:\n>");
 							name = inputScanner.nextLine();
-							System.out.print("Enter phonenumber: ");
+							System.out.print("Enter phonenumber:\n>");
 							number = inputScanner.nextLine();
 							for (Customer customer : customer.customerList) {
 								if (customer.name.toLowerCase().equalsIgnoreCase(name)
@@ -236,7 +236,7 @@ public class Product implements Serializable {
 								}
 							}
 
-							System.out.println("Added Name: " + name + "  number: " + number);
+							System.out.println("Added Name: "+name+",  number: " + number);
 							List<Integer> borrowed = new ArrayList<Integer>();
 							borrowed.add(id);
 							Customer c1 = new Customer(name, number, borrowed);

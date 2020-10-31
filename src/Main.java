@@ -38,31 +38,31 @@ public class Main implements Serializable {
 			break;
 		case "checkout": // Borrow book
 			usercommand = Commands.CHECKOUT;
-			System.out.print("Enter ID of product to checkout: ");
+			System.out.print("Enter ID of product to checkout:\n>");
 			int checkoutID = scanner.nextInt();
 			newProduct.productBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
 			usercommand = Commands.CHECKIN;
-			System.out.print("Enter ID of product to return: ");
+			System.out.print("Enter ID of product to return:\n>");
 			int checkinID = scanner.nextInt();
 			newProduct.productReturn(checkinID);
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
-			System.out.print("Enter \"b\" for book or \"m\" for movie: ");
+			System.out.print("Enter \"b\" for book or \"m\" for movie:\n>");
 			char c = scanner.next(".").charAt(0);
 			newProduct.registerDialogue(c);
 				break;
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
-			System.out.print("Enter ID of product to remove: ");
+			System.out.print("Enter ID of product to remove:\n>");
 			int deregisterID = scanner.nextInt();
 			newProduct.removeAtID(deregisterID);
 			break;
 		case "info": //Info for product
 			usercommand = Commands.INFO;
-			System.out.print("Enter ID of product to search for: ");
+			System.out.print("Enter ID of product to search for:\n>");
 			int infoID = scanner.nextInt();
 			newProduct.searchID(infoID);
 			break;
@@ -92,7 +92,7 @@ public class Main implements Serializable {
 		while (runprogram) {
 			Scanner useroption = new Scanner(System.in);
 			String usercommand;
-			System.out.println("enter command");
+			System.out.print("Enter a command\n>");
 			usercommand = useroption.next();
 			if(Pattern.matches("[a-z]{4,10}", usercommand)){
 				runprogram = true;
