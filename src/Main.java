@@ -68,7 +68,7 @@ public class Main implements Serializable {
 			break;
 		case "quit": //Quit program
 			usercommand = Commands.QUIT;
-			System.out.println("Stopping program...");
+			System.out.println("Exiting program...");
 			System.exit(0);
 			break;
 		}
