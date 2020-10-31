@@ -119,7 +119,7 @@ public class Product implements Serializable {
 			}
 		}
 	}
-	public void searchAndReturn(int id) {
+	public void productReturn(int id) {
 		if (unAvailableProducts.contains(id)) {
 			for (Integer product : unAvailableProducts) {
 				if (product == id) {
@@ -161,8 +161,7 @@ public class Product implements Serializable {
 		}
 
 	}
-	public void searchAndBorrow(int id) {
-//		saveOrInit = new InitializersAndSavers();
+	public void productBorrow(int id) {
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();

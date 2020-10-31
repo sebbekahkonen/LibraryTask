@@ -40,13 +40,13 @@ public class Main implements Serializable {
 			usercommand = Commands.CHECKOUT;
 			System.out.print("Enter ID of product to checkout: ");
 			int checkoutID = scanner.nextInt();
-			newProduct.searchAndBorrow(checkoutID);
+			newProduct.productBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
 			usercommand = Commands.CHECKIN;
 			System.out.print("Enter ID of product to return: ");
 			int checkinID = scanner.nextInt();
-			newProduct.searchAndReturn(checkinID);
+			newProduct.productReturn(checkinID);
 			break;
 		case "register": // add book
 			usercommand = Commands.REGISTER;
