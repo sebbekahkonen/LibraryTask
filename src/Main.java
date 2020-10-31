@@ -86,8 +86,8 @@ public class Main implements Serializable {
 		saveOrInit.initializeBookList();
 		saveOrInit.saveCustomerList();
 		saveOrInit.saveUnAvailableProductsList();
-		newProduct.customer.customerList.clear();
-		newProduct.unAvailableProducts.clear();
+//		newProduct.customer.customerList.clear();
+//		newProduct.unAvailableProducts.clear();
 
 		while (runprogram) {
 			Scanner useroption = new Scanner(System.in);

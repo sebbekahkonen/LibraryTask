@@ -162,6 +162,7 @@ public class Product implements Serializable {
 
 	}
 	public void searchAndBorrow(int id) {
+		saveOrInit = new InitializersAndSavers();
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
