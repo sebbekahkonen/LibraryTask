@@ -7,7 +7,7 @@ public class Customer implements Serializable {
 	protected static List<Customer> customerList = new ArrayList<Customer>();
 	protected String name;
 	protected String number;
-	protected static List<Integer> borrowedProducts = new ArrayList<Integer>();
+	protected List<Integer> borrowedProducts = new ArrayList<Integer>();
 	
 	public Customer(String name, String number, List list) {
 		this.name = name;

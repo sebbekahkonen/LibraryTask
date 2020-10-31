@@ -127,6 +127,7 @@ public class Product implements Serializable {
 				}
 			}
 			unAvailableProducts.remove(Integer.valueOf(id));
+			saveOrInit.saveUnAvailableProductsList();
 		} else if (!saveid.contains(id)) {
 			System.out.println("Product with id: \"" + id + "\" does not exist");
 		} else {
@@ -138,6 +139,7 @@ public class Product implements Serializable {
 			Customer target = iter.next();
 			if (target.borrowedProducts.contains(id)) {
 				target.borrowedProducts.remove(Integer.valueOf(id));
+				saveOrInit.saveCustomerList();
 				String idtoString = Integer.valueOf(id).toString();
 				for (Book book : books) {
 					if (book.getBooksString().contains(idtoString)) {
@@ -250,7 +252,7 @@ public class Product implements Serializable {
 	public void getBooksAndMovies() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
-		if (customer.customerList.isEmpty())	{
+		if (customer.customerList.isEmpty() && unAvailableProducts.isEmpty())	{
 			for (Book book : books)	{
 				System.out.println(book.getBooksString());
 			}
