@@ -13,6 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Product implements Serializable {
 	private static final int serialVersionUID = 136420;
@@ -102,6 +103,22 @@ public class Product implements Serializable {
 	}
 
 	// Search
+	public void searchCustomer(String name) {
+		if(Pattern.matches("[A-Za-z]{1,40}", name)) {
+		Iterator<Customer> iterCustomer = customer.customerList.iterator();
+		while(iterCustomer.hasNext()) {
+			Customer target = iterCustomer.next();
+			if(target.name.equalsIgnoreCase(name)) {
+				System.out.println(target.getCustomerWithList());
+				return;
+			}
+		}
+		System.out.println("\""+name+"\" does not exist");
+		}
+		else {
+			System.out.println("\""+name+"\" is not valid, try with letters");
+		}
+	}
 	public void searchID(int id) {
 		if (!(saveid.contains(id)))	{
 			System.out.println("Product with ID: " + id + " does not exist, try again.");

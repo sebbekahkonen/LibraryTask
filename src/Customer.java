@@ -17,6 +17,9 @@ public class Customer implements Serializable {
 	public String getCustomer() {
 		return String.format("Name: %s, Number: %s",name, number);
 	}
+	public String getCustomerWithList() {
+		return String.format("Name: %s, Number: %s, Borrowed: %s",name, number, borrowedProducts);
+	}
 	
 	
 }	

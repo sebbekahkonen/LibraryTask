@@ -24,6 +24,7 @@ public class Main implements Serializable {
 		REGISTER,
 		DEREGISTER,
 		INFO,
+		CUSTOMERINFO,
 		QUIT;
 	}
 	
@@ -66,6 +67,12 @@ public class Main implements Serializable {
 			int infoID = scanner.nextInt();
 			newProduct.searchID(infoID);
 			break;
+		case "customerinfo":
+			usercommand = Commands.CUSTOMERINFO;
+			System.out.print("Enter name of the customer to search for:\n>");
+			String name = scanner.nextLine();
+			newProduct.searchCustomer(name);
+			break;
 		case "quit": //Quit program
 			usercommand = Commands.QUIT;
 			System.out.println("Exiting program...");
@@ -94,7 +101,7 @@ public class Main implements Serializable {
 			String usercommand;
 			System.out.print("Enter a command\n>");
 			usercommand = useroption.next();
-			if(Pattern.matches("[a-z]{4,10}", usercommand)){
+			if(Pattern.matches("[a-z]{4,12}", usercommand)){
 				runprogram = true;
 				option(usercommand);
 			}else {
