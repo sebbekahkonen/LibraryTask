@@ -20,7 +20,7 @@ Commands:
 
 list - See all registered products
 
-checkout - Borrow a product
+checkout - Borrow a product to customer
 
 checkin - Return borrowed product
 
@@ -28,8 +28,10 @@ register - Register a new product
 
 deregister - Deregister existing product
 
-info - get info(Title, value, pages/duration, author/raiting)
+info - Get info(Title, value, pages/duration, author/raiting)
 
-customerinfo - get customer info(name, number, borrowedproducts)
+customerinfo - Get customer info(name, number, borrowedproducts)
 
-quit - exiting program
+quit - Exit program
+
+view - See all commands
