@@ -128,7 +128,7 @@ public class Main implements Serializable {
 			System.out.print("Enter a command\n>");
 			usercommand = useroption.next().toLowerCase();
 			option(usercommand);
-		}
+		}//Hej
 		
 		
 		
