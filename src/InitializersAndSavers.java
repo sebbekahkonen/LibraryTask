@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
-public class InitializersAndSavers extends Product implements Serializable{
+public class InitializersAndSavers extends Library implements Serializable{
 	private static final int serialVersionUID = 136420;
 	
 	//Initializers
@@ -17,7 +17,7 @@ public class InitializersAndSavers extends Product implements Serializable{
 			File file = new File("book_list.bin");
 			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream oin = new ObjectInputStream(fin);
-			books = (List<Book>) oin.readObject();
+			products = (List<Product>) oin.readObject();
 			oin.close();
 //			for (Book book : books) {
 //				System.out.println(book.getBooksString());
@@ -33,27 +33,27 @@ public class InitializersAndSavers extends Product implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	public static void initializeMovieList()	{
-		try {
-			File file = new File("movie_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			movies = (List<Movie>) oin.readObject();
-			oin.close();
-//			for (Movie movie : movies) {
-//				System.out.println(movie.getMoviesString());
-//			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void initializeMovieList()	{
+//		try {
+//			File file = new File("movie_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			movies = (List<Movie>) oin.readObject();
+//			oin.close();
+////			for (Movie movie : movies) {
+////				System.out.println(movie.getMoviesString());
+////			}
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	public static void initializeIdList()	{
 		try {
 			File file = new File("id_list.bin");
@@ -157,7 +157,7 @@ public class InitializersAndSavers extends Product implements Serializable{
 		try {
 			fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(books);
+			out.writeObject(products);
 			out.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -189,7 +189,7 @@ public class InitializersAndSavers extends Product implements Serializable{
 		try {
 			fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(movies);
+			out.writeObject(products);
 			out.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

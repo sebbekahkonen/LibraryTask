@@ -1,18 +1,13 @@
 import java.io.Serializable;
 import java.util.Iterator;
-
-public class Movie implements Serializable {
+//implements Serializable
+public class Movie extends Product{
 	private static final int serialVersionUID = 136420;
-	protected int id;
-	protected String title;
-	protected int value;
 	protected int duration;
 	protected double rating;
-
-	public Movie(int id, String title, int value, int duration, double raiting) {
-		this.id = id;
-		this.title = title;
-		this.value = value;
+	
+	public Movie(int id, String title,int value, int duration, double raiting) {
+		super(id, title, value);
 		this.duration = duration;
 		this.rating = raiting;
 	}

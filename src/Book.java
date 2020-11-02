@@ -5,19 +5,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.List;
-
-public class Book implements Serializable{
+//implements Serializable
+public class Book extends Product{
 	private static final int serialVersionUID = 136420;
-	protected int id;
-	protected String title;
-	protected int value;
 	protected int pages;
 	protected String publisher;
 	
 	public Book(int id, String title, int value, int pages, String publisher) {
-		this.id = id;
-		this.title = title;
-		this.value = value;
+		super(id, title, value);
 		this.pages = pages;
 		this.publisher = publisher;
 	}

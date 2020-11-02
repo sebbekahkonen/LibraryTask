@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class Main implements Serializable {
 	private static final int serialVersionUID = 136420;
 	static boolean runProgram = true;
-	static Product newProduct = new Product();
+	static Library newProduct = new Library();
 	
 	
 	enum Commands {
@@ -94,11 +94,11 @@ public class Main implements Serializable {
 	}
 	
 	public static void initializeState()	{
-		newProduct.saveOrInit.initializeUnAvailableProductsList();
-		newProduct.saveOrInit.initializeCustomerList();
-		newProduct.saveOrInit.initializeIdList();
-		newProduct.saveOrInit.initializeMovieList();
-		newProduct.saveOrInit.initializeBookList();
+//		newProduct.saveOrInit.initializeUnAvailableProductsList();
+//		newProduct.saveOrInit.initializeCustomerList();
+//		newProduct.saveOrInit.initializeIdList();
+//		newProduct.saveOrInit.initializeMovieList();
+//		newProduct.saveOrInit.initializeBookList();
 	}
 	
 	public static void welcomeUser(int x)	{
