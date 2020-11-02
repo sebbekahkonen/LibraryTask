@@ -19,9 +19,9 @@ public class InitializersAndSavers extends Product implements Serializable{
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			books = (List<Book>) oin.readObject();
 			oin.close();
-			for (Book book : books) {
-				System.out.println(book.getBooksString());
-			}
+//			for (Book book : books) {
+//				System.out.println(book.getBooksString());
+//			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,9 +40,9 @@ public class InitializersAndSavers extends Product implements Serializable{
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			movies = (List<Movie>) oin.readObject();
 			oin.close();
-			for (Movie movie : movies) {
-				System.out.println(movie.getMoviesString());
-			}
+//			for (Movie movie : movies) {
+//				System.out.println(movie.getMoviesString());
+//			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class InitializersAndSavers extends Product implements Serializable{
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			saveid = (List<Integer>) oin.readObject();
 			oin.close();
-			System.out.println(saveid);
+//			System.out.println(saveid);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -81,7 +81,7 @@ public class InitializersAndSavers extends Product implements Serializable{
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			unAvailableProducts = (List<Integer>) oin.readObject();
 			oin.close();
-			System.out.println(unAvailableProducts);
+//			System.out.println(unAvailableProducts);
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -101,9 +101,9 @@ public class InitializersAndSavers extends Product implements Serializable{
 			ObjectInputStream oin = new ObjectInputStream(fin);
 			customer.customerList = (List<Customer>) oin.readObject();
 			oin.close();
-			for (Customer customer : customer.customerList)	{
-				System.out.println(customer.getCustomer());
-			}
+//			for (Customer customer : customer.customerList)	{
+//				System.out.println(customer.getCustomer());
+//			}
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

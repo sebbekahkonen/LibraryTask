@@ -99,6 +99,8 @@ public class Product implements Serializable {
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid format, try again");
+		} catch (NumberFormatException n)	{
+			System.out.println("Invalid format, try again");
 		}
 	}
 
@@ -201,12 +203,16 @@ public class Product implements Serializable {
 				for (Book book : books) {
 					if (book.id == id) {
 						String name;
-						String number;
+						Long number;
 						if (!unAvailableProducts.contains(id)) {
 							System.out.print("Enter name:\n>");
 							name = inputScanner.nextLine();
+							if (!(Pattern.matches("[A-Za-z]{1,40}", name)))	{
+								System.out.println("Name should be letters only, try again");
+								return;
+							}
 							System.out.print("Enter phonenumber:\n>");
-							number = inputScanner.nextLine();
+							number = Long.parseLong(inputScanner.nextLine());	
 							for (Customer customer : customer.customerList) {
 								if (customer.name.toLowerCase().equalsIgnoreCase(name)
 										&& customer.number.equals(number)) {
@@ -235,12 +241,16 @@ public class Product implements Serializable {
 				for (Movie movie : movies) {
 					if (movie.id == id) {
 						String name;
-						String number;
+						Long number;
 						if (!unAvailableProducts.contains(id)) {
 							System.out.print("Enter name:\n>");
 							name = inputScanner.nextLine();
+							if (!(Pattern.matches("[A-Za-z]{1,40}", name)))	{
+								System.out.println("Name should be letters only, try again");
+								return;
+							}
 							System.out.print("Enter phonenumber:\n>");
-							number = inputScanner.nextLine();
+							number = Long.parseLong(inputScanner.nextLine());
 							for (Customer customer : customer.customerList) {
 								if (customer.name.toLowerCase().equalsIgnoreCase(name)
 										&& customer.number.equals(number)) {
@@ -267,8 +277,8 @@ public class Product implements Serializable {
 					}
 				}
 			}
-		} catch (InputMismatchException e) {
-			System.out.println("Invalid format, try again");
+		} catch (NumberFormatException n)	{
+			System.out.println("Invalid format, try again asadadad");
 		}
 	}
 

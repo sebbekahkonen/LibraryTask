@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 public class Main implements Serializable {
 	private static final int serialVersionUID = 136420;
-	static boolean runprogram = true;
+	static boolean runProgram = true;
 	static Product newProduct = new Product();
 	
 	
@@ -25,7 +25,8 @@ public class Main implements Serializable {
 		DEREGISTER,
 		INFO,
 		CUSTOMERINFO,
-		QUIT;
+		QUIT,
+		VIEW;
 	}
 	
 	static Commands option(String options) {
@@ -40,13 +41,13 @@ public class Main implements Serializable {
 		case "checkout": // Borrow book
 			usercommand = Commands.CHECKOUT;
 			System.out.print("Enter ID of product to checkout:\n>");
-			int checkoutID = scanner.nextInt();
+			int checkoutID = Integer.parseInt(scanner.nextLine());
 			newProduct.productBorrow(checkoutID);
 			break;
 		case "checkin": // return borrowed book
 			usercommand = Commands.CHECKIN;
 			System.out.print("Enter ID of product to return:\n>");
-			int checkinID = scanner.nextInt();
+			int checkinID = Integer.parseInt(scanner.nextLine());
 			newProduct.productReturn(checkinID);
 			break;
 		case "register": // add book
@@ -58,13 +59,13 @@ public class Main implements Serializable {
 		case "deregister": // remove book
 			usercommand = Commands.DEREGISTER;
 			System.out.print("Enter ID of product to remove:\n>");
-			int deregisterID = scanner.nextInt();
+			int deregisterID = Integer.parseInt(scanner.nextLine());
 			newProduct.removeAtID(deregisterID);
 			break;
 		case "info": //Info for product
 			usercommand = Commands.INFO;
 			System.out.print("Enter ID of product to search for:\n>");
-			int infoID = scanner.nextInt();
+			int infoID = Integer.parseInt(scanner.nextLine());
 			newProduct.searchID(infoID);
 			break;
 		case "customerinfo":
@@ -78,36 +79,57 @@ public class Main implements Serializable {
 			System.out.println("Exiting program...");
 			System.exit(0);
 			break;
+		case "view": //View commands
+			usercommand = Commands.VIEW;
+			welcomeUser(0);
+			break;
+		default:
+			System.out.println("That is not a valid command, try again");
+			break;
 		}
 		}catch(InputMismatchException e) {
 			System.out.println("Invalid format, try again");
 		}
 		return usercommand;
 	}
-
-	public static void main(String[] args) {
+	
+	public static void initializeState()	{
 		newProduct.saveOrInit.initializeUnAvailableProductsList();
 		newProduct.saveOrInit.initializeCustomerList();
 		newProduct.saveOrInit.initializeIdList();
 		newProduct.saveOrInit.initializeMovieList();
 		newProduct.saveOrInit.initializeBookList();
+	}
+	
+	public static void welcomeUser(int x)	{
+		if (x == 1)	{
+			System.out.println("\t\tLibrary System");
+		}
+		System.out.println("\t\t  COMMANDS:");
+		System.out.println("\t List:           View inventory");
+		System.out.println("\t Checkout:       Checkout product to customer");
+		System.out.println("\t Checkin:        Checkin product from customer");
+		System.out.println("\t Register:       Register new product to inventory");
+		System.out.println("\t Deregister:     Remove product from inventory");
+		System.out.println("\t Info:           Search info for product via product ID");
+		System.out.println("\t Customerinfo:   Get info about customer");
+		System.out.println("\t View:           View available commands again");
+		System.out.println("\t Quit:           Exit program");
 		
-//		newProduct.customer.customerList.clear();
-//		newProduct.unAvailableProducts.clear();
-//		newProduct.saveOrInit.saveCustomerList();
-//		newProduct.saveOrInit.saveUnAvailableProductsList();
-		while (runprogram) {
+	}
+
+	public static void main(String[] args) {
+		initializeState();
+		welcomeUser(1);
+
+		while (runProgram) {
 			Scanner useroption = new Scanner(System.in);
 			String usercommand;
 			System.out.print("Enter a command\n>");
-			usercommand = useroption.next();
-			if(Pattern.matches("[a-z]{4,12}", usercommand)){
-				runprogram = true;
-				option(usercommand);
-			}else {
-				System.out.println("Sorry that's not a command");
-			}
+			usercommand = useroption.next().toLowerCase();
+			option(usercommand);
 		}
+		
 		
 		
 	}
