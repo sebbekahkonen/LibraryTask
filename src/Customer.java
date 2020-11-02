@@ -23,4 +23,4 @@ public class Customer implements Serializable {
 	}
 	
 	
-}	
+}	//hej
