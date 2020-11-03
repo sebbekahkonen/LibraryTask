@@ -31,79 +31,67 @@ public class Library implements Serializable {
 	}
 	
 	// Dialogues
-	public void registerDialogue(char c){//KLAR?
+	public void registerDialogue(char c){//KLAR
 		try {
-			Scanner userinput = new Scanner(System.in);
-			if (c == 'm') {
+			if (c == 'm' || c == 'b') {
+				Scanner userinput = new Scanner(System.in);
 				int id = 0;
 				String idString = null;
 				double rating;
-				do	{
-				System.out.print("(id for movie should start with\'5\' and be 3-6 numbers long) Enter id:\n>");
-				id = Integer.parseInt(userinput.nextLine());
-				if(saveid.contains(id)) {
-					System.out.println("Product with id: \""+id+"\" already exists");
-					return;
-				}
+				do {
+					System.out.print("(ID has to be 4 numbers) Enter id:\n>");
+					id = Integer.parseInt(userinput.nextLine());
+					for(Product product : products) {
+						if(product.id == id) {
+							System.out.println("Product with id: \"" + id + "\" already exists");
+							return;
+						}
+					}
 				idString = Integer.toString(id);
-				} while (idString.matches("^5\\d{2,5}") == false);
+				} while (idString.matches("\\d{4}") == false);
 				System.out.print("Enter title:\n>");
 				String title = userinput.nextLine();
 				System.out.print("Enter value:\n>");
 				int value = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter duration: (minutes)\n>");
-				int duration = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter rating:\n>");
-				do	{
-					rating = Double.parseDouble(userinput.nextLine());
-					if (rating > 10 || rating < 0) {
-						System.out.println("Rating should be between 0.0 and 10.0\n>");
-					}
-				} while (rating < 0 && rating > 10);
-				products.add(product = new Movie(id, title, value, duration, rating));
-				Collections.sort(products, Comparator.comparing(Product::getId));
-				saveid.add(id);
-				saveOrInit.saveIdList();
-				saveOrInit.saveProductList();
-			} else if (c == 'b') {
-				int id = 0;
-				String idString = null;
-				do	{
-				System.out.print("(Id for book should start with \'1\' and should be 3-6 numbers long) Enter id:\n>");
-				id = Integer.parseInt(userinput.nextLine());
-				if(saveid.contains(id)) {
-					System.out.println("Product with id: \""+id+"\" already exists");
-					return;
+				if (c == 'm') {
+					System.out.print("Enter duration: (minutes)\n>");
+					int duration = Integer.parseInt(userinput.nextLine());
+					System.out.print("Enter rating:\n>");
+					do {
+						rating = Double.parseDouble(userinput.nextLine());
+						if (rating > 10 || rating < 0) {
+							System.out.println("Rating should be between 0.0 and 10.0\n>");
+						}
+					} while (rating < 0 && rating > 10);
+					products.add(product = new Movie(id, title, value, duration, rating));
+					Collections.sort(products, Comparator.comparing(Product::getId));
+				} else if (c == 'b') {
+					System.out.print("Enter pages:\n>");
+					int pages = Integer.parseInt(userinput.nextLine());
+					System.out.print("Enter author:\n>");
+					String publisher = userinput.nextLine();
+					products.add(book = new Book(id, title, value, pages, publisher));
+					Collections.sort(products, Comparator.comparing(Product::getId));
 				}
-				idString =Integer.toString(id);
-				} while (idString.matches("^1\\d{2,5}") == false);
-				System.out.print("title:\n>");
-				String title = userinput.nextLine();
-				System.out.print("Enter value:\n>");
-				int value = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter pages:\n>");
-				int pages = Integer.parseInt(userinput.nextLine());
-				System.out.print("Enter author:\n>");
-				String publisher = userinput.nextLine();
-				products.add(book = new Book(id, title, value, pages, publisher));
-				Collections.sort(products, Comparator.comparing(Product::getId));
 				saveid.add(id);
 				saveOrInit.saveIdList();
 				saveOrInit.saveProductList();
+				return;
 			} else {
 				System.out.println("Invalid charinput, try again");
 				return;
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid format, try again");
-		} catch (NumberFormatException n)	{
+		} catch (NumberFormatException n) {
 			System.out.println("Invalid format, try again");
 		}
 	}
 
+
 	// Search
 	public void searchCustomer(String name) {//KLAR?
-		if(Pattern.matches("[A-Za-z]{1,40}", name)) {					//Ändra här för att kunna söka för- och efternamn (space)
+		if(Pattern.matches("[A-Za-z]{1,40}", name)) {					//ï¿½ndra hï¿½r fï¿½r att kunna sï¿½ka fï¿½r- och efternamn (space)
 		Iterator<Customer> iterCustomer = customer.customerList.iterator();
 		while(iterCustomer.hasNext()) {
 			Customer target = iterCustomer.next();
@@ -172,7 +160,7 @@ public class Library implements Serializable {
 			}
 		}
 	}
-	public void productBorrow(int id) {//KLAR? Nej, man kan inte låna en movie. Har nog bara glömt lägga in det i metoden
+	public void productBorrow(int id) {//KLAR? Nej, man kan inte lï¿½na en movie. Har nog bara glï¿½mt lï¿½gga in det i metoden
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
