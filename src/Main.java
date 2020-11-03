@@ -88,7 +88,6 @@ public class Main implements Serializable {
 	public static void initializeState() {
 		newProduct.saveOrInit.initializeUnAvailableProductsList();
 		newProduct.saveOrInit.initializeCustomerList();
-//		newProduct.saveOrInit.initializeIdList();
 		newProduct.saveOrInit.initializeProductList();
 	}
 

@@ -175,7 +175,7 @@ public class Library implements Serializable {
 						if (!(Pattern.matches("\\d+", number))) {
 							System.out.println("Number should be digits only, try again");
 							return;
-						}	
+						}
 						for (Customer customer : customer.customerList) {
 							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number)) {
 								customer.borrowedProducts.add(id);
@@ -212,31 +212,35 @@ public class Library implements Serializable {
 	public void getProducts() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
-		if (customer.customerList.isEmpty()) {
-			for (Product product : products) {
-				System.out.println(product);
-			}
-			return;
-		} else {
-			for (Product product1 : products) {
-				for (Customer customer : customer.customerList) {
-					if (customer.borrowedProducts.contains(product1.id)) {
+		if (products.isEmpty()) {
+			System.out.println("List is empty, try 'register' command to register products");
+		} else if (!(products.isEmpty())) {
+			if (customer.customerList.isEmpty()) {
+				for (Product product : products) {
+					System.out.println(product);
+				}
+				return;
+			} else {
+				for (Product product1 : products) {
+					for (Customer customer : customer.customerList) {
+						if (customer.borrowedProducts.contains(product1.id)) {
+							printList.add(product1.toString());
+							String borrowed = "\t\t is borrowed by " + customer.getCustomer();
+							printList.add(borrowed);
+						}
+					}
+					if (printList.contains(product1.toString())) {
+						continue;
+					} else if (!printList.contains(product1.toString())) {
 						printList.add(product1.toString());
-						String borrowed = "\t\t is borrowed by " + customer.getCustomer();
-						printList.add(borrowed);
 					}
 				}
-				if (printList.contains(product1.toString())) {
-					continue;
-				} else if (!printList.contains(product1.toString())) {
-					printList.add(product1.toString());
+				for (String str : printList) {
+					System.out.println(str);
 				}
-			}
-			for (String str : printList) {
-				System.out.println(str);
-			}
-			if (printList.isEmpty()) {
-				System.out.println("No books or movies available. Use command \'register\'");
+				if (printList.isEmpty()) {
+					System.out.println("No books or movies available. Use command \'register\'");
+				}
 			}
 		}
 
