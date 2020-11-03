@@ -68,7 +68,7 @@ public class Library implements Serializable {
 					int pages = Integer.parseInt(userinput.nextLine());
 					System.out.print("Enter author:\n>");
 					String publisher = userinput.nextLine();
-					products.add(book = new Book(id, title, value, pages, publisher));
+					products.add(product = new Book(id, title, value, pages, publisher));
 					Collections.sort(products, Comparator.comparing(Product::getId));
 				}
 				saveOrInit.saveProductList();
@@ -162,7 +162,7 @@ public class Library implements Serializable {
 			for (Product product : products) {
 				if (product.id == id) {
 					String name;
-					Long number;
+					String number;
 					if (!unAvailableProducts.contains(id)) {
 						System.out.print("Enter name:\n>");
 						name = inputScanner.nextLine();
@@ -171,7 +171,11 @@ public class Library implements Serializable {
 							return;
 						}
 						System.out.print("Enter phonenumber:\n>");
-						number = Long.parseLong(inputScanner.nextLine());
+						number = inputScanner.nextLine();
+						if (!(Pattern.matches("\\d+", number))) {
+							System.out.println("Number should be digits only, try again");
+							return;
+						}	
 						for (Customer customer : customer.customerList) {
 							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number)) {
 								customer.borrowedProducts.add(id);
