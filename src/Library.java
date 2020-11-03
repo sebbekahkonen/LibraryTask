@@ -120,17 +120,18 @@ public class Library implements Serializable {
 	}
 	
 	public void searchID(int id) {//KLAR?
-		if (!(saveid.contains(id)))	{
-			System.out.println("Product with ID: " + id + " does not exist, try again.");
-			return;
-		}
-		for(Product product : products) {
-			if(product.id == id) {
-				System.out.println(product);
-				return;
+		int idCheck = 0;
+		for (Product p : products)	{
+			if (p.id == id)	{
+				idCheck = 1;
+				System.out.println(p);
 			}
 		}
+		if (idCheck == 0)	{
+			System.out.println("Product with ID: " + id + " does not exist, try again.");
+		}
 	}
+	
 	public void productReturn(int id) {//KLAR?
 		if (unAvailableProducts.contains(id)) {
 			for (Integer product : unAvailableProducts) {
