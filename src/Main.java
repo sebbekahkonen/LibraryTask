@@ -1,13 +1,13 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -98,7 +98,7 @@ public class Main implements Serializable {
 	public static void initializeState()	{
 		newProduct.saveOrInit.initializeUnAvailableProductsList();
 		newProduct.saveOrInit.initializeCustomerList();
-		newProduct.saveOrInit.initializeIdList();
+//		newProduct.saveOrInit.initializeIdList();
 		newProduct.saveOrInit.initializeProductList();
 	}
 	

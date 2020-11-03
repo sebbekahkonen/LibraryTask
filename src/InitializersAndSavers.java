@@ -31,24 +31,25 @@ public class InitializersAndSavers extends Library implements Serializable{
 		}
 	}
 
-	public static void initializeIdList()	{
-		try {
-			File file = new File("id_list.bin");
-			FileInputStream fin = new FileInputStream(file);
-			ObjectInputStream oin = new ObjectInputStream(fin);
-			saveid = (List<Integer>) oin.readObject();
-			oin.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void initializeIdList()	{
+//		for(Product product : products)
+//		try {
+//			File file = new File("id_list.bin");
+//			FileInputStream fin = new FileInputStream(file);
+//			ObjectInputStream oin = new ObjectInputStream(fin);
+//			saveid = (List<Integer>) oin.readObject();
+//			oin.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public void initializeUnAvailableProductsList()	{
 		try {
@@ -139,20 +140,20 @@ public class InitializersAndSavers extends Library implements Serializable{
 		}
 	}
 	
-	public static void saveIdList() {
-		File file = new File("id_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(saveid);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void saveIdList() {
+//		File file = new File("id_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(saveid);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

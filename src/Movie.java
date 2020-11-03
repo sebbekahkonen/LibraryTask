@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.util.Iterator;
+//import java.util.Iterator;
 //implements Serializable
 public class Movie extends Product implements Serializable{
 	private static final int serialVersionUID = 136420;
