@@ -1,10 +1,3 @@
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.FileNotFoundException;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
-//import java.io.ObjectInputStream;
-//import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +6,6 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-//import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Library implements Serializable {
@@ -29,9 +21,9 @@ public class Library implements Serializable {
 
 	public Library() {
 	}
-	
+
 	// Dialogues
-	public void registerDialogue(char c){//KLAR
+	public void registerDialogue(char c) {
 		try {
 			if (c == 'm' || c == 'b') {
 				Scanner userinput = new Scanner(System.in);
@@ -41,21 +33,21 @@ public class Library implements Serializable {
 				do {
 					System.out.print("(ID has to be 4 numbers) Enter id:\n>");
 					id = Integer.parseInt(userinput.nextLine());
-					for(Product product : products) {
-						if(product.id == id) {
+					for (Product product : products) {
+						if (product.id == id) {
 							System.out.println("Product with id: \"" + id + "\" already exists");
 							return;
 						}
 					}
-				idString = Integer.toString(id);
+					idString = Integer.toString(id);
 				} while (idString.matches("\\d{4}") == false);
 				System.out.print("Enter title:\n>");
 				String title = userinput.nextLine();
-				for(Product product : products) {
-				if(title.equalsIgnoreCase(product.title)) {
-					System.out.println("\""+title+"\" already exists in products, type 'list' to see it");
-					return;
-				}
+				for (Product product : products) {
+					if (title.equalsIgnoreCase(product.title)) {
+						System.out.println("\"" + title + "\" already exists in products, type 'list' to see it");
+						return;
+					}
 				}
 				System.out.print("Enter value:\n>");
 				int value = Integer.parseInt(userinput.nextLine());
@@ -79,7 +71,6 @@ public class Library implements Serializable {
 					products.add(book = new Book(id, title, value, pages, publisher));
 					Collections.sort(products, Comparator.comparing(Product::getId));
 				}
-//				saveOrInit.saveIdList();
 				saveOrInit.saveProductList();
 				return;
 			} else {
@@ -93,9 +84,8 @@ public class Library implements Serializable {
 		}
 	}
 
-
 	// Search
-	public void searchCustomer(String name) {// KLAR
+	public void getCustomerinfo(String name) {
 		if (Pattern.matches("[A-Za-z ]{1,40}", name)) {
 			Iterator<Customer> iterCustomer = customer.customerList.iterator();
 			while (iterCustomer.hasNext()) {
@@ -105,52 +95,52 @@ public class Library implements Serializable {
 					return;
 				}
 			}
-			System.out.println("customer with name: \""+name+"\" does not exist");
+			System.out.println("customer with name: \"" + name + "\" does not exist");
 		} else {
-			System.out.println("\""+name+"\" is not valid, try with letters");
+			System.out.println("\"" + name + "\" is not valid, try with letters");
 		}
 	}
-	
-	public void searchID(int id) {//KLAR?
-		for (Product p : products)	{
-			if (p.id == id)	{
+
+	public void getInfo(int id) {
+		for (Product p : products) {
+			if (p.id == id) {
 				System.out.println(p);
 				return;
 			}
 		}
 		System.out.println("Product with ID: " + id + " does not exist, try again.");
 	}
-	
-	public void productReturn(int id) {//KLAR?
+
+	public void productReturn(int id) {
 		boolean idExists = false;
-		for (Product p : products)	{
-			if (p.id == id)	{
+		for (Product p : products) {
+			if (p.id == id) {
 				idExists = true;
 			}
 		}
-		if (!(idExists))	{
+		if (!(idExists)) {
 			System.out.println("Product with id: \"" + id + "\" does not exist");
 			return;
 		}
-		if (!(unAvailableProducts.contains(Integer.valueOf(id))))	{
+		if (!(unAvailableProducts.contains(Integer.valueOf(id)))) {
 			System.out.println("Product with id: \"" + id + "\" isnt borrowed out");
 			return;
 		}
 		unAvailableProducts.remove(Integer.valueOf(id));
 		saveOrInit.saveUnAvailableProductsList();
-		
+
 		Iterator<Customer> iter = customer.customerList.iterator();
 		while (iter.hasNext()) {
 			Customer target = iter.next();
 			if (target.borrowedProducts.contains(id)) {
 				target.borrowedProducts.remove(Integer.valueOf(id));
-				if (target.borrowedProducts.isEmpty())	{
+				if (target.borrowedProducts.isEmpty()) {
 					customer.customerList.remove(target);
 				}
 				saveOrInit.saveCustomerList();
 				String idtoString = Integer.valueOf(id).toString();
-				for(Product product : products) {
-					if(product.toString().contains(idtoString)) {
+				for (Product product : products) {
+					if (product.toString().contains(idtoString)) {
 						System.out.println("You have sucessfully returned " + product.title + "");
 						return;
 					}
@@ -166,7 +156,7 @@ public class Library implements Serializable {
 	public void productBorrow(int id) {
 		try {
 			Scanner inputScanner = new Scanner(System.in);
-			String idtoString = Integer.valueOf(id).toString();			
+			String idtoString = Integer.valueOf(id).toString();
 			String targetId = Integer.toString(id);
 			char firstInTarget = targetId.charAt(0);
 			for (Product product : products) {
@@ -207,7 +197,7 @@ public class Library implements Serializable {
 					return;
 				}
 			}
-			System.out.println("Product with ID: " + id + " does not exist, see 'list' for all registered products");			
+			System.out.println("Product with ID: " + id + " does not exist, see 'list' for all registered products");
 
 		} catch (NumberFormatException n) {
 			System.out.println("Invalid format, try again");
@@ -215,70 +205,68 @@ public class Library implements Serializable {
 	}
 
 	// Getter
-	public void getBooksAndMovies() {//KLAR
+	public void getProducts() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
-		if (customer.customerList.isEmpty())	{
-			for(Product product : products) {
-					System.out.println(product);
+		if (customer.customerList.isEmpty()) {
+			for (Product product : products) {
+				System.out.println(product);
 			}
 			return;
-		}else {
-			for(Product product1 : products) {
-				for(Customer customer : customer.customerList) {
-					if(customer.borrowedProducts.contains(product1.id)) {
-							printList.add(product1.toString());
+		} else {
+			for (Product product1 : products) {
+				for (Customer customer : customer.customerList) {
+					if (customer.borrowedProducts.contains(product1.id)) {
+						printList.add(product1.toString());
 						String borrowed = "\t\t is borrowed by " + customer.getCustomer();
 						printList.add(borrowed);
 					}
 				}
-				if (printList.contains(product1.toString()))	{
+				if (printList.contains(product1.toString())) {
 					continue;
-				} else 	if(!printList.contains(product1.toString())){
+				} else if (!printList.contains(product1.toString())) {
 					printList.add(product1.toString());
 				}
 			}
-			for (String str : printList)	{
+			for (String str : printList) {
 				System.out.println(str);
 			}
-			if (printList.isEmpty())	{
+			if (printList.isEmpty()) {
 				System.out.println("No books or movies available. Use command \'register\'");
 			}
 		}
-		
+
 	}
-	
+
 	// Remove
-	public void removeAtID(int id) { //KLAR
-		if(!unAvailableProducts.contains(id)) {
+	public void removeAtID(int id) {
+		if (!unAvailableProducts.contains(id)) {
 			String id2 = Integer.toString(id);
-			for(Product product : products) {
-			if (product.id == id) {
-				// Movies Iterator
-				Iterator<Product> iterproducts = products.iterator();
-				while (iterproducts.hasNext()) {
-					Product target = iterproducts.next();
-					String targetSplit = target.toString().split(",")[0];
-					if (targetSplit.equals(id2)) {
-						iterproducts.remove();
-						Integer removeId = Integer.parseInt(targetSplit);
-						System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
-						saveOrInit.saveProductList();
-//						saveOrInit.saveIdList();
-						return;
+			for (Product product : products) {
+				if (product.id == id) {
+					Iterator<Product> iterproducts = products.iterator();
+					while (iterproducts.hasNext()) {
+						Product target = iterproducts.next();
+						String targetSplit = target.toString().split(",")[0];
+						if (targetSplit.equals(id2)) {
+							iterproducts.remove();
+							Integer removeId = Integer.parseInt(targetSplit);
+							System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
+							saveOrInit.saveProductList();
+							return;
+						}
 					}
-				}
-				return;
+					return;
 				}
 			}
-		}else if(unAvailableProducts.contains(id)){
-			System.out.println("You cant remove product with ID: \""+id+"\" because its borrowed out");
+		} else if (unAvailableProducts.contains(id)) {
+			System.out.println("You cant remove product with ID: \"" + id + "\" because its borrowed out");
 			return;
-		}else if(products.isEmpty()) {
+		} else if (products.isEmpty()) {
 			System.out.println("There are no products in the library to remove");
 			return;
 		}
-			System.out.println("Product with id: \""+id+"\" does not exist");
-			return;
+		System.out.println("Product with id: \"" + id + "\" does not exist");
+		return;
 	}
 }
