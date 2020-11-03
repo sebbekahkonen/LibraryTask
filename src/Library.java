@@ -90,20 +90,19 @@ public class Library implements Serializable {
 
 
 	// Search
-	public void searchCustomer(String name) {//KLAR?
-		if(Pattern.matches("[A-Za-z]{1,40}", name)) {					//�ndra h�r f�r att kunna s�ka f�r- och efternamn (space)
-		Iterator<Customer> iterCustomer = customer.customerList.iterator();
-		while(iterCustomer.hasNext()) {
-			Customer target = iterCustomer.next();
-			if(target.name.equalsIgnoreCase(name)) {
-				System.out.println(target.getCustomerWithList());
-				return;
+	public void searchCustomer(String name) {// KLAR
+		if (Pattern.matches("[A-Za-z ]{1,40}", name)) {
+			Iterator<Customer> iterCustomer = customer.customerList.iterator();
+			while (iterCustomer.hasNext()) {
+				Customer target = iterCustomer.next();
+				if (target.name.equalsIgnoreCase(name)) {
+					System.out.println(target.getCustomerWithList());
+					return;
+				}
 			}
-		}
-		System.out.println("\""+name+"\" does not exist");
-		}
-		else {
-			System.out.println("\""+name+"\" is not valid, try with letters");
+			System.out.println("\"" + name + "\" does not exist");
+		} else {
+			System.out.println("\"" + name + "\" is not valid, try with letters");
 		}
 	}
 	
