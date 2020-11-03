@@ -97,8 +97,7 @@ public class Main implements Serializable {
 		newProduct.saveOrInit.initializeUnAvailableProductsList();
 		newProduct.saveOrInit.initializeCustomerList();
 		newProduct.saveOrInit.initializeIdList();
-//		newProduct.saveOrInit.initializeMovieList();
-		newProduct.saveOrInit.initializeBookList();
+		newProduct.saveOrInit.initializeProductList();
 	}
 	
 	public static void welcomeUser(int x)	{
@@ -119,6 +118,8 @@ public class Main implements Serializable {
 	}
 
 	public static void main(String[] args) {
+		
+		
 		initializeState();
 		welcomeUser(1);
 
@@ -128,7 +129,7 @@ public class Main implements Serializable {
 			System.out.print("Enter a command\n>");
 			usercommand = useroption.next().toLowerCase();
 			option(usercommand);
-		}//Hejhej
+		}
 		
 		
 		

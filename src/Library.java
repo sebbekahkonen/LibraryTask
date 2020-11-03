@@ -23,10 +23,7 @@ public class Library implements Serializable {
 	protected Customer customer;
 	protected Product product;
 	protected static InitializersAndSavers saveOrInit = new InitializersAndSavers();
-//	protected static List<Movie> movies = new ArrayList<Movie>();
-//	protected static List<Book> books = new ArrayList<Book>();
 	protected static List<Product> products = new ArrayList<Product>();
-	
 	protected static List<Integer> saveid = new ArrayList<Integer>();
 	protected static List<Integer> unAvailableProducts = new ArrayList<Integer>();
 
@@ -42,7 +39,7 @@ public class Library implements Serializable {
 				String idString = null;
 				double rating;
 				do	{
-				System.out.print("(id for movie should start with\'5\' and be 3-5 numbers long) Enter id:\n>");
+				System.out.print("(id for movie should start with\'5\' and be 3-6 numbers long) Enter id:\n>");
 				id = Integer.parseInt(userinput.nextLine());
 				if(saveid.contains(id)) {
 					System.out.println("Product with id: \""+id+"\" already exists");
@@ -67,12 +64,12 @@ public class Library implements Serializable {
 				Collections.sort(products, Comparator.comparing(Product::getId));
 				saveid.add(id);
 				saveOrInit.saveIdList();
-				saveOrInit.saveBookList();
+				saveOrInit.saveProductList();
 			} else if (c == 'b') {
 				int id = 0;
 				String idString = null;
 				do	{
-				System.out.print("(Id for book should start with \'1\' and should be 3-5 numbers long) Enter id:\n>");
+				System.out.print("(Id for book should start with \'1\' and should be 3-6 numbers long) Enter id:\n>");
 				id = Integer.parseInt(userinput.nextLine());
 				if(saveid.contains(id)) {
 					System.out.println("Product with id: \""+id+"\" already exists");
@@ -92,7 +89,7 @@ public class Library implements Serializable {
 				Collections.sort(products, Comparator.comparing(Product::getId));
 				saveid.add(id);
 				saveOrInit.saveIdList();
-				saveOrInit.saveBookList();
+				saveOrInit.saveProductList();
 			} else {
 				System.out.println("Invalid charinput, try again");
 				return;
@@ -106,7 +103,7 @@ public class Library implements Serializable {
 
 	// Search
 	public void searchCustomer(String name) {//KLAR?
-		if(Pattern.matches("[A-Za-z]{1,40}", name)) {
+		if(Pattern.matches("[A-Za-z]{1,40}", name)) {					//Ändra här för att kunna söka för- och efternamn (space)
 		Iterator<Customer> iterCustomer = customer.customerList.iterator();
 		while(iterCustomer.hasNext()) {
 			Customer target = iterCustomer.next();
@@ -121,6 +118,7 @@ public class Library implements Serializable {
 			System.out.println("\""+name+"\" is not valid, try with letters");
 		}
 	}
+	
 	public void searchID(int id) {//KLAR?
 		if (!(saveid.contains(id)))	{
 			System.out.println("Product with ID: " + id + " does not exist, try again.");
@@ -130,32 +128,8 @@ public class Library implements Serializable {
 			if(product.id == id) {
 				System.out.println(product);
 				return;
-//				if(product.equals(movie)) {
-//					System.out.println(product.movie.getMoviesString());
-//					return;
-//				}else if(product.equals(book)) {
-//					System.out.println(product.book.getBooksString());
-//					return;
-//				}
 			}
 		}
-		
-		
-//		String targetId = Integer.toString(id);
-//		char firstInTarget = targetId.charAt(0);
-//		if (firstInTarget == '1')	{
-//			for (Book book : books)	{
-//				if (book.id == id)	{
-//					System.out.println(book.getBooksString());
-//				}
-//			}
-//		} else if (firstInTarget == '5')	{
-//			for (Movie movie : movies)	{
-//				if (movie.id == id)	{
-//					System.out.println(movie.getMoviesString());
-//				}
-//			}
-//		}
 	}
 	public void productReturn(int id) {//KLAR?
 		if (unAvailableProducts.contains(id)) {
@@ -195,32 +169,9 @@ public class Library implements Serializable {
 				System.out.println("there is no such product in \"" + target.name + "\" list");
 				break;
 			}
-				
-//			-----------------	
-				
-//				for (Book book : books) {
-//					if (book.getBooksString().contains(idtoString)) {
-//						System.out.println("You have sucessfully returned " + book.title + "");
-//						return;
-//					}
-//					for (Movie movie : movies) {
-//						if (movie.getMoviesString().contains(idtoString)) {
-//							System.out.println("You have sucessfully returned " + movie.title + "");
-//							return;
-//						}
-//					}
-//				}
-//				System.out.println("you have successfully returned " + id + "");
-//				return;
-//			}
-//			if (!iter.hasNext()) {
-//				System.out.println("there is no such product in \"" + target.name + "\" list");
-//				break;
-//			}
 		}
-
 	}
-	public void productBorrow(int id) {//KLAR?
+	public void productBorrow(int id) {//KLAR? Nej, man kan inte låna en movie. Har nog bara glömt lägga in det i metoden
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
@@ -268,45 +219,6 @@ public class Library implements Serializable {
 						}
 					}
 				}
-//			} else if (firstInTarget == '5') {
-//				for (Movie movie : movies) {
-//					if (movie.id == id) {
-//						String name;
-//						Long number;
-//						if (!unAvailableProducts.contains(id)) {
-//							System.out.print("Enter name:\n>");
-//							name = inputScanner.nextLine();
-//							if (!(Pattern.matches("[A-Za-z]{1,40}", name)))	{
-//								System.out.println("Name should be letters only, try again");
-//								return;
-//							}
-//							System.out.print("Enter phonenumber:\n>");
-//							number = Long.parseLong(inputScanner.nextLine());
-//							for (Customer customer : customer.customerList) {
-//								if (customer.name.toLowerCase().equalsIgnoreCase(name)
-//										&& customer.number.equals(number)) {
-//									customer.borrowedProducts.add(id);
-//									unAvailableProducts.add(id);
-//									saveOrInit.saveCustomerList();
-//									saveOrInit.saveUnAvailableProductsList();
-//									System.out.println("Added to existing list");
-//									return;
-//								}
-//							}
-//
-//							System.out.println("Added Name: "+name+",  number: " + number);
-//							List<Integer> borrowed = new ArrayList<Integer>();
-//							borrowed.add(id);
-//							Customer c1 = new Customer(name, number, borrowed);
-//							customer.customerList.add(c1);
-//							unAvailableProducts.add(id);
-//							saveOrInit.saveCustomerList();
-//							saveOrInit.saveUnAvailableProductsList();
-//						} else {
-//							System.out.println("Product with ID: \"" + id + "\" is already borrowed out");
-//						}
-//					}
-//				}
 			}
 		} catch (NumberFormatException n)	{
 			System.out.println("Invalid format, try again asadadad");
@@ -320,10 +232,9 @@ public class Library implements Serializable {
 		if (customer.customerList.isEmpty())	{
 			for(Product product : products) {
 					System.out.println(product);
-				}
-			return;
 			}
-
+			return;
+		}
 		for(Product product1 : products) {
 			for(Customer customer : customer.customerList) {
 				if(customer.borrowedProducts.contains(product1.id)) {
@@ -331,7 +242,6 @@ public class Library implements Serializable {
 					String borrowed = "\t\t is borrowed by " + customer.getCustomer();
 					printList.add(borrowed);
 				}
-				
 			}
 			if (printList.contains(product1.toString()))	{
 				continue;
@@ -345,42 +255,6 @@ public class Library implements Serializable {
 		if (printList.isEmpty())	{
 			System.out.println("No books or movies available. Use command \'register\'");
 		}
-//		--------------
-		
-//		for (Book book : books)		{
-//			for (Customer customer : customer.customerList)	{
-//				if (customer.borrowedProducts.contains(book.id))	{
-//					String borrowed = "\t\t is borrowed by " + customer.getCustomer();
-//					printList.add(book.getBooksString());
-//					printList.add(borrowed);
-//				}  
-//			}
-//			if (printList.contains(book.getBooksString()))	{
-//				continue;
-//			} else 	{
-//				printList.add(book.getBooksString());
-//			}
-//		}	
-//		for (Movie movie : movies)	{
-//			for (Customer customer : customer.customerList)	{
-//				if (customer.borrowedProducts.contains(movie.id))	{
-//					String borrowed = "\t\tis borrowed by " + customer.getCustomer();
-//					printList.add(movie.getMoviesString());
-//					printList.add(borrowed);
-//				}
-//			}
-//			if (printList.contains(movie.getMoviesString()))	{
-//				continue;
-//			} else	{
-//				printList.add(movie.getMoviesString());
-//			}
-//		}
-//		for (String str : printList)	{
-//			System.out.println(str);
-//		}
-//		if (printList.isEmpty())	{
-//			System.out.println("No books or movies available. Use command \'register\'");
-//		}
 	}
 	
 	// Remove
@@ -397,26 +271,10 @@ public class Library implements Serializable {
 					Integer removeId = Integer.parseInt(targetSplit);
 					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
-					saveOrInit.saveBookList();
+					saveOrInit.saveProductList();
 					saveOrInit.saveIdList();
 				}
 			}
-//--------------
-			// Books Iterator
-//			Iterator<Book> iterBooks = books.iterator();
-//			while (iterBooks.hasNext()) {
-//				Book target2 = iterBooks.next();
-//				String target2Split = target2.getBooksString().split(",")[0];
-//				if (target2Split.equals(id2)) {
-//					iterBooks.remove();
-//					Integer removeId = Integer.parseInt(target2Split);
-//					saveid.remove(removeId);
-//					System.out.println("You've successfully removed \"" + target2.getTitle() + "\"");
-//					saveOrInit.saveBookList();
-//					saveOrInit.saveIdList();
-//				}
-//			}
-//		----------
 		} else if (!(saveid.contains(id))) {
 			System.out.println("Product with id: \""+id+"\" does not exist");
 		}
