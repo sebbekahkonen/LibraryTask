@@ -107,33 +107,33 @@ public class Library implements Serializable {
 	}
 	
 	public void searchID(int id) {//KLAR?
-		int idCheck = 0;
 		for (Product p : products)	{
 			if (p.id == id)	{
-				idCheck = 1;
 				System.out.println(p);
+				return;
 			}
 		}
-		if (idCheck == 0)	{
-			System.out.println("Product with ID: " + id + " does not exist, try again.");
-		}
+		System.out.println("Product with ID: " + id + " does not exist, try again.");
 	}
 	
 	public void productReturn(int id) {//KLAR?
-		if (unAvailableProducts.contains(id)) {
-			for (Integer product : unAvailableProducts) {
-				if (product == id) {
-					break;
-				}
+		boolean idExists = false;
+		for (Product p : products)	{
+			if (p.id == id)	{
+				idExists = true;
 			}
-			unAvailableProducts.remove(Integer.valueOf(id));
-			saveOrInit.saveUnAvailableProductsList();
-		} else if (!saveid.contains(id)) {
+		}
+		if (!(idExists))	{
 			System.out.println("Product with id: \"" + id + "\" does not exist");
-		} else {
+			return;
+		}
+		if (!(unAvailableProducts.contains(Integer.valueOf(id))))	{
 			System.out.println("Product with id: \"" + id + "\" isnt borrowed out");
 			return;
 		}
+		unAvailableProducts.remove(Integer.valueOf(id));
+		saveOrInit.saveUnAvailableProductsList();
+		
 		Iterator<Customer> iter = customer.customerList.iterator();
 		while (iter.hasNext()) {
 			Customer target = iter.next();
@@ -150,8 +150,6 @@ public class Library implements Serializable {
 						return;
 					}
 				}
-				System.out.println("you have successfully returned " + id + "");
-				return;
 			}
 			if (!iter.hasNext()) {
 				System.out.println("there is no such product in \"" + target.name + "\" list");
