@@ -159,7 +159,8 @@ public class Library implements Serializable {
 			}
 		}
 	}
-	public void productBorrow(int id) {//KLAR? Nej, man kan inte l�na en movie. Har nog bara gl�mt l�gga in det i metoden
+
+	public void productBorrow(int id) {
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
@@ -169,47 +170,44 @@ public class Library implements Serializable {
 			}
 			String targetId = Integer.toString(id);
 			char firstInTarget = targetId.charAt(0);
-			if (firstInTarget == '1') {
-				for (Product product : products) {
-					if (product.id == id) {
-						String name;
-						Long number;
-						if (!unAvailableProducts.contains(id)) {
-							System.out.print("Enter name:\n>");
-							name = inputScanner.nextLine();
-							if (!(Pattern.matches("(?i)[A-Za-z ]{1,40}", name)))	{
-								System.out.println("Name should be letters only, try again");
+			for (Product product : products) {
+				if (product.id == id) {
+					String name;
+					Long number;
+					if (!unAvailableProducts.contains(id)) {
+						System.out.print("Enter name:\n>");
+						name = inputScanner.nextLine();
+						if (!(Pattern.matches("(?i)[A-Za-z ]{1,40}", name))) {
+							System.out.println("Name should be letters only, try again");
+							return;
+						}
+						System.out.print("Enter phonenumber:\n>");
+						number = Long.parseLong(inputScanner.nextLine());
+						for (Customer customer : customer.customerList) {
+							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number)) {
+								customer.borrowedProducts.add(id);
+								unAvailableProducts.add(id);
+								saveOrInit.saveCustomerList();
+								saveOrInit.saveUnAvailableProductsList();
+								System.out.println("Added to existing list");
 								return;
 							}
-							System.out.print("Enter phonenumber:\n>");
-							number = Long.parseLong(inputScanner.nextLine());	
-							for (Customer customer : customer.customerList) {
-								if (customer.name.toLowerCase().equalsIgnoreCase(name)
-										&& customer.number.equals(number)) {
-									customer.borrowedProducts.add(id);
-									unAvailableProducts.add(id);
-									saveOrInit.saveCustomerList();
-									saveOrInit.saveUnAvailableProductsList();
-									System.out.println("Added to existing list");
-									return;
-								}
-							}
-							System.out.println("Added name: "+name+", number: " + number);
-							List<Integer> borrowed = new ArrayList<Integer>();
-							borrowed.add(id);
-							Customer c1 = new Customer(name, number, borrowed);
-							customer.customerList.add(c1);
-							unAvailableProducts.add(id);
-							saveOrInit.saveCustomerList();
-							saveOrInit.saveUnAvailableProductsList();
-						} else {
-							System.out.println("Product with ID: \"" + id + "\" is already borrowed out");
 						}
+						System.out.println("Added name: " + name + ", number: " + number);
+						List<Integer> borrowed = new ArrayList<Integer>();
+						borrowed.add(id);
+						Customer c1 = new Customer(name, number, borrowed);
+						customer.customerList.add(c1);
+						unAvailableProducts.add(id);
+						saveOrInit.saveCustomerList();
+						saveOrInit.saveUnAvailableProductsList();
+					} else {
+						System.out.println("Product with ID: \"" + id + "\" is already borrowed out");
 					}
 				}
 			}
-		} catch (NumberFormatException n)	{
-			System.out.println("Invalid format, try again asadadad");
+		} catch (NumberFormatException n) {
+			System.out.println("Invalid format, try again");
 		}
 	}
 

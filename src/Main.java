@@ -87,8 +87,10 @@ public class Main implements Serializable {
 			System.out.println("That is not a valid command, try again");
 			break;
 		}
+		}catch(NumberFormatException e) {
+			System.out.println("Invalid format, try using numbers");
 		}catch(InputMismatchException e) {
-			System.out.println("Invalid format, try again");
+			System.out.println("Invalid format, try using a char");
 		}
 		return usercommand;
 	}
