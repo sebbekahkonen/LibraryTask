@@ -23,4 +23,4 @@ public class Movie extends Product implements Serializable {
 	public int getId() {
 		return id;
 	}
-}
+}//hej

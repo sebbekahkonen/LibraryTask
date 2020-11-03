@@ -21,4 +21,4 @@ abstract class Product implements Serializable {
 	public String getTitle() {
 		return String.format("%s", title);
 	}
-}
+}//hej
