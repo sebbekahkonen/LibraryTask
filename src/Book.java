@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.List;
 //implements Serializable
-public class Book extends Product{
+public class Book extends Product implements Serializable{
 	private static final int serialVersionUID = 136420;
 	protected int pages;
 	protected String publisher;
@@ -18,7 +18,7 @@ public class Book extends Product{
 	}
 	
 	//Getters
-	public String getBooksString() {
+	public String toString() {
 		return String.format("%s, (book)title: %s, value: %skr, pages: %s, author: %s", 
 				id, title, value, pages, publisher);
 	}

@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Product {
+abstract class Product implements Serializable{
+	private static final int serialVersionUID = 136420;
 	int id;
 	String title;
 	int value;
@@ -15,14 +17,14 @@ abstract class Product {
 	public int getId()	{
 		return id;
 	}
-	public String getBooksString() {
-		return String.format("%s, (book)title: %s, value: %skr, pages: %s, author: %s", 
-				id, title, value, book.pages, book.publisher);
-	}
-	public String getMoviesString() {
-		return String.format("%s, (Movie)title: %s, value: %skr, duration: %s minutes, rating: %.1f", 
-				id, title, value, movie.duration, movie.rating);
-	}
+//	public String getBooksString() {
+//		return String.format("%s, (book)title: %s, value: %skr, pages: %s, author: %s", 
+//				id, title, value, book.pages, book.publisher);
+//	}
+//	public String getMoviesString() {
+//		return String.format("%s, (Movie)title: %s, value: %skr, duration: %s minutes, rating: %.1f", 
+//				id, title, value, movie.duration, movie.rating);
+//	}
 	public String getTitle() {
 		return String.format("%s", title);
 	}

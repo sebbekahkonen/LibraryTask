@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Iterator;
 //implements Serializable
-public class Movie extends Product{
+public class Movie extends Product implements Serializable{
 	private static final int serialVersionUID = 136420;
 	protected int duration;
 	protected double rating;
@@ -11,7 +11,7 @@ public class Movie extends Product{
 		this.duration = duration;
 		this.rating = raiting;
 	}
-	public String getMoviesString() {
+	public String toString() {
 		return String.format("%s, (Movie)title: %s, value: %skr, duration: %s minutes, rating: %.1f", 
 				id, title, value, duration, rating);
 	}

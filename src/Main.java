@@ -94,11 +94,11 @@ public class Main implements Serializable {
 	}
 	
 	public static void initializeState()	{
-//		newProduct.saveOrInit.initializeUnAvailableProductsList();
-//		newProduct.saveOrInit.initializeCustomerList();
-//		newProduct.saveOrInit.initializeIdList();
+		newProduct.saveOrInit.initializeUnAvailableProductsList();
+		newProduct.saveOrInit.initializeCustomerList();
+		newProduct.saveOrInit.initializeIdList();
 //		newProduct.saveOrInit.initializeMovieList();
-//		newProduct.saveOrInit.initializeBookList();
+		newProduct.saveOrInit.initializeBookList();
 	}
 	
 	public static void welcomeUser(int x)	{

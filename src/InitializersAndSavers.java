@@ -38,7 +38,7 @@ public class InitializersAndSavers extends Library implements Serializable{
 //			File file = new File("movie_list.bin");
 //			FileInputStream fin = new FileInputStream(file);
 //			ObjectInputStream oin = new ObjectInputStream(fin);
-//			movies = (List<Movie>) oin.readObject();
+//			products = (List<Product>) oin.readObject();
 //			oin.close();
 ////			for (Movie movie : movies) {
 ////				System.out.println(movie.getMoviesString());
@@ -183,20 +183,20 @@ public class InitializersAndSavers extends Library implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	public static void saveMovieList() {
-		File file = new File("movie_list.bin");
-		FileOutputStream fout;
-		try {
-			fout = new FileOutputStream(file);
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(products);
-			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void saveMovieList() {
+//		File file = new File("movie_list.bin");
+//		FileOutputStream fout;
+//		try {
+//			fout = new FileOutputStream(file);
+//			ObjectOutputStream out = new ObjectOutputStream(fout);
+//			out.writeObject(products);
+//			out.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }//hej

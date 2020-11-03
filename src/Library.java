@@ -34,7 +34,7 @@ public class Library implements Serializable {
 	}
 	
 	// Dialogues
-	public void registerDialogue(char c){
+	public void registerDialogue(char c){//KLAR?
 		try {
 			Scanner userinput = new Scanner(System.in);
 			if (c == 'm') {
@@ -67,7 +67,7 @@ public class Library implements Serializable {
 				Collections.sort(products, Comparator.comparing(Product::getId));
 				saveid.add(id);
 				saveOrInit.saveIdList();
-				saveOrInit.saveMovieList();
+				saveOrInit.saveBookList();
 			} else if (c == 'b') {
 				int id = 0;
 				String idString = null;
@@ -105,7 +105,7 @@ public class Library implements Serializable {
 	}
 
 	// Search
-	public void searchCustomer(String name) {
+	public void searchCustomer(String name) {//KLAR?
 		if(Pattern.matches("[A-Za-z]{1,40}", name)) {
 		Iterator<Customer> iterCustomer = customer.customerList.iterator();
 		while(iterCustomer.hasNext()) {
@@ -121,20 +121,22 @@ public class Library implements Serializable {
 			System.out.println("\""+name+"\" is not valid, try with letters");
 		}
 	}
-	public void searchID(int id) {
+	public void searchID(int id) {//KLAR?
 		if (!(saveid.contains(id)))	{
 			System.out.println("Product with ID: " + id + " does not exist, try again.");
 			return;
 		}
 		for(Product product : products) {
 			if(product.id == id) {
-				if(product.equals(movie)) {
-					System.out.println(product.getMoviesString());
-					return;
-				}else if(product.equals(book)) {
-					System.out.println(product.getBooksString());
-					return;
-				}
+				System.out.println(product);
+				return;
+//				if(product.equals(movie)) {
+//					System.out.println(product.movie.getMoviesString());
+//					return;
+//				}else if(product.equals(book)) {
+//					System.out.println(product.book.getBooksString());
+//					return;
+//				}
 			}
 		}
 		
@@ -155,7 +157,7 @@ public class Library implements Serializable {
 //			}
 //		}
 	}
-	public void productReturn(int id) {
+	public void productReturn(int id) {//KLAR?
 		if (unAvailableProducts.contains(id)) {
 			for (Integer product : unAvailableProducts) {
 				if (product == id) {
@@ -181,7 +183,7 @@ public class Library implements Serializable {
 				saveOrInit.saveCustomerList();
 				String idtoString = Integer.valueOf(id).toString();
 				for(Product product : products) {
-					if(product.getBooksString().contains(idtoString) || product.getMoviesString().contains(idtoString)) {
+					if(product.toString().contains(idtoString)) {
 						System.out.println("You have sucessfully returned " + product.title + "");
 						return;
 					}
@@ -194,7 +196,7 @@ public class Library implements Serializable {
 				break;
 			}
 				
-				
+//			-----------------	
 				
 //				for (Book book : books) {
 //					if (book.getBooksString().contains(idtoString)) {
@@ -218,7 +220,7 @@ public class Library implements Serializable {
 		}
 
 	}
-	public void productBorrow(int id) {
+	public void productBorrow(int id) {//KLAR?
 		try {
 			Scanner inputScanner = new Scanner(System.in);
 			String idtoString = Integer.valueOf(id).toString();
@@ -236,7 +238,7 @@ public class Library implements Serializable {
 						if (!unAvailableProducts.contains(id)) {
 							System.out.print("Enter name:\n>");
 							name = inputScanner.nextLine();
-							if (!(Pattern.matches("[A-Za-z]{1,40}", name)))	{
+							if (!(Pattern.matches("(?i)[A-Za-z ]{1,40}", name)))	{
 								System.out.println("Name should be letters only, try again");
 								return;
 							}
@@ -312,43 +314,29 @@ public class Library implements Serializable {
 	}
 
 	// Getter
-	public void getBooksAndMovies() {
+	public void getBooksAndMovies() {//KLAR
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
 		if (customer.customerList.isEmpty())	{
 			for(Product product : products) {
-					System.out.println(product.getBooksString());
-					System.out.println(product.getMoviesString());
+					System.out.println(product);
 				}
 			return;
 			}
-//			for (Book book : books)	{
-//				System.out.println(book.getBooksString());
-//			}
-//			for (Movie movie : movies)	{
-//				System.out.println(movie.getMoviesString());
-//			}
-		
 
-		for(Product product : products) {
+		for(Product product1 : products) {
 			for(Customer customer : customer.customerList) {
-				if(customer.borrowedProducts.contains(product.id)) {
-					if(product == book) {
-						printList.add(product.getBooksString());
-					}else if(product == movie) {
-						printList.add(product.getMoviesString());
-					}
+				if(customer.borrowedProducts.contains(product1.id)) {
+						printList.add(product1.toString());
 					String borrowed = "\t\t is borrowed by " + customer.getCustomer();
 					printList.add(borrowed);
 				}
 				
 			}
-			if (printList.contains(product.getBooksString()) || printList.contains(movie.getMoviesString()))	{
+			if (printList.contains(product1.toString()))	{
 				continue;
-			} else 	if(!printList.contains(product.getBooksString())){
-				printList.add(product.getBooksString());
-			} else if(!printList.contains(product.getBooksString())) {
-				printList.add(product.getMoviesString());
+			} else 	if(!printList.contains(product1.toString())){
+				printList.add(product1.toString());
 			}
 		}
 		for (String str : printList)	{
@@ -357,6 +345,7 @@ public class Library implements Serializable {
 		if (printList.isEmpty())	{
 			System.out.println("No books or movies available. Use command \'register\'");
 		}
+//		--------------
 		
 //		for (Book book : books)		{
 //			for (Customer customer : customer.customerList)	{
@@ -395,25 +384,24 @@ public class Library implements Serializable {
 	}
 	
 	// Remove
-	public void removeAtID(int id) {
+	public void removeAtID(int id) { //KLAR
 		String id2 = Integer.toString(id);
 		if (saveid.contains(id)) {
 			// Movies Iterator
 			Iterator<Product> iterproducts = products.iterator();
 			while (iterproducts.hasNext()) {
 				Product target = iterproducts.next();
-				String targetSplitMovie = target.getMoviesString().split(",")[0];
-				String targetSplitBook = target.getBooksString().split(",")[0];
-				if (targetSplitMovie.equals(id2) || targetSplitBook.equals(id2)) {
+				String targetSplit = target.toString().split(",")[0];
+				if (targetSplit.equals(id2)) {
 					iterproducts.remove();
-//					Integer removeId = Integer.parseInt(targetSplit);
-					saveid.remove(id);
+					Integer removeId = Integer.parseInt(targetSplit);
+					saveid.remove(removeId);
 					System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
-					saveOrInit.saveMovieList();
+					saveOrInit.saveBookList();
 					saveOrInit.saveIdList();
 				}
 			}
-
+//--------------
 			// Books Iterator
 //			Iterator<Book> iterBooks = books.iterator();
 //			while (iterBooks.hasNext()) {
@@ -428,6 +416,7 @@ public class Library implements Serializable {
 //					saveOrInit.saveIdList();
 //				}
 //			}
+//		----------
 		} else if (!(saveid.contains(id))) {
 			System.out.println("Product with id: \""+id+"\" does not exist");
 		}
