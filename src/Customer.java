@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer implements Serializable {
-	private static final int serialVersionUID = 136420;
+	private static final long serialVersionUID = 136420;
 	protected static List<Customer> customerList = new ArrayList<Customer>();
 	protected String name;
 	protected String number;
 	protected List<Integer> borrowedProducts = new ArrayList<Integer>();
 	protected Product newProduct;
 	
-	public Customer(String name, String number, List list) {
+	public Customer(String name, String number, List<Integer> list) {
 		this.name = name;
 		this.number = number;
 		this.borrowedProducts = list;

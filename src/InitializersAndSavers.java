@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class InitializersAndSavers extends Library implements Serializable {
-	private static final int serialVersionUID = 136420;
+	private static final long serialVersionUID = 136420;
 
 	// Initializers
 	public static void initializeProductList() {
@@ -49,7 +49,8 @@ public class InitializersAndSavers extends Library implements Serializable {
 			File file = new File("customer_list.bin");
 			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream oin = new ObjectInputStream(fin);
-			customer.customerList = (List<Customer>) oin.readObject();
+			//Ändrade till statisk
+			Customer.customerList = (List<Customer>) oin.readObject();
 			oin.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -67,7 +68,8 @@ public class InitializersAndSavers extends Library implements Serializable {
 		try {
 			fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(customer.customerList);
+			//Ändrade till statisk
+			out.writeObject(Customer.customerList);
 			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

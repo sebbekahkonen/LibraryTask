@@ -3,9 +3,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main implements Serializable {
-	private static final int serialVersionUID = 136420;
+	//Bytte dessa till Long
+	private static final long serialVersionUID = 136420;
 	static boolean runProgram = true;
 	static Library newProduct = new Library();
+	static private Scanner userinput;
 	
 	enum Commands {
 		LIST,
@@ -22,7 +24,7 @@ public class Main implements Serializable {
 	static Commands option(String options) {
 		Commands usercommand = null;
 		try {
-			Scanner scanner = new Scanner(System.in);
+			userinput = new Scanner(System.in);
 			switch (options) {
 			case "list": // See all products
 				usercommand = Commands.LIST;
@@ -31,38 +33,46 @@ public class Main implements Serializable {
 			case "checkout": // Borrow book
 				usercommand = Commands.CHECKOUT;
 				System.out.print("Enter ID of product to checkout:\n>");
-				int checkoutID = Integer.parseInt(scanner.nextLine());
+				int checkoutID = Integer.parseInt(userinput.nextLine());
 				newProduct.productBorrow(checkoutID);
 				break;
 			case "checkin": // return borrowed book
 				usercommand = Commands.CHECKIN;
 				System.out.print("Enter ID of product to return:\n>");
-				int checkinID = Integer.parseInt(scanner.nextLine());
+				int checkinID = Integer.parseInt(userinput.nextLine());
 				newProduct.productReturn(checkinID);
 				break;
 			case "register": // add book
 				usercommand = Commands.REGISTER;
 				System.out.print("Enter \"b\" for book or \"m\" for movie:\n>");
-				char c = scanner.next(".").charAt(0);
+				char c = userinput.next(".").charAt(0);
 				newProduct.registerDialogue(c);
 				break;
 			case "deregister": // remove book
 				usercommand = Commands.DEREGISTER;
 				System.out.print("Enter ID of product to remove:\n>");
-				int deregisterID = Integer.parseInt(scanner.nextLine());
+				int deregisterID = Integer.parseInt(userinput.nextLine());
 				newProduct.removeAtID(deregisterID);
 				break;
 			case "info": // Info for product
 				usercommand = Commands.INFO;
-				System.out.print("Enter ID of product to search for:\n>");
-				int infoID = Integer.parseInt(scanner.nextLine());
-				newProduct.getInfo(infoID);
+				if(newProduct.products.isEmpty()) {
+					System.out.println("There are no products registered");
+				}else {
+					System.out.print("Enter ID of product to search for:\n>");
+					int infoID = Integer.parseInt(userinput.nextLine());
+					newProduct.getInfo(infoID);	
+				}
 				break;
 			case "customerinfo":
 				usercommand = Commands.CUSTOMERINFO;
-				System.out.print("Enter name of the customer to search for:\n>");
-				String name = scanner.nextLine();
-				newProduct.getCustomerinfo(name);
+				if (Customer.customerList.isEmpty()) {
+					System.out.println("There are no customers registered");
+				} else {
+					System.out.print("Enter name of the customer to search for:\n>");
+					String name = userinput.nextLine();
+					newProduct.getCustomerinfo(name);
+				}
 				break;
 			case "quit": // Quit program
 				usercommand = Commands.QUIT;
@@ -86,9 +96,12 @@ public class Main implements Serializable {
 	}
 
 	public static void initializeState() {
-		newProduct.saveOrInit.initializeUnAvailableProductsList();
-		newProduct.saveOrInit.initializeCustomerList();
-		newProduct.saveOrInit.initializeProductList();
+		Library.saveOrInit.initializeUnAvailableProductsList();
+		Library.saveOrInit.initializeCustomerList();
+		InitializersAndSavers.initializeProductList();
+//		newProduct.saveOrInit.initializeUnAvailableProductsList();
+//		newProduct.saveOrInit.initializeCustomerList();
+//		newProduct.saveOrInit.initializeProductList();
 	}
 
 	public static void welcomeUser(int x) {
@@ -114,10 +127,10 @@ public class Main implements Serializable {
 		welcomeUser(1);
 
 		while (runProgram) {
-			Scanner useroption = new Scanner(System.in);
+			userinput = new Scanner(System.in);
 			String usercommand;
 			System.out.print("Enter a command\n>");
-			usercommand = useroption.next().toLowerCase();
+			usercommand = userinput.next().toLowerCase();
 			option(usercommand);
 		}
 
