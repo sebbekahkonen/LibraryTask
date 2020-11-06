@@ -18,9 +18,9 @@ abstract class Product implements Serializable {
 	int value;
 	
 	/*constructor for product
-	 * @param id sets instance id
-	 * @param title sets instance title
-	 * @param value sets instance value
+	 * @param id sets this instance id
+	 * @param title sets this instance title
+	 * @param value sets this instance value
 	 */
 	public Product(int id, String title, int value) {
 		this.id = id;

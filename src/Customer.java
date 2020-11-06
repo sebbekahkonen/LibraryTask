@@ -15,13 +15,11 @@ public class Customer implements Serializable {
 	 * name -- holds name of customer
 	 * number -- holds phoneNumber to customer
 	 * borrowedProducts -- list of this instance of customer's currently borrowed products
-	 * newProduct -- used to reach functionality from class Product
 	 */
 	protected static List<Customer> customerList = new ArrayList<Customer>();
 	protected String name;
 	protected String number;
 	protected List<Integer> borrowedProducts = new ArrayList<Integer>();
-	protected Product newProduct;
 	
 	/*Constructor for Customer
 	 * @param name, sets name for this instance of Customer
