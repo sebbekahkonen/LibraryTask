@@ -8,22 +8,35 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+	/*Class Library is a class implementing all functionality to make Library such as registering new products to inventory
+	 * function to borrow out products, check in products, search info about products, view full inventory, keep track of
+	 * products available for borrowing, find info about customers and remove products from inventory
+	 * 
+	 *@author Niklas Kullberg
+	 *@author Sebastian Kahkonen
+	 */
 public class Library implements Serializable {
 	private static final long serialVersionUID = 136420;
-//	protected Book book;
-//	protected Movie movie;
+	
+	/*customer -- used to reach functionality from class Customer
+	 * product -- used to reach functionality from class Product
+	 * saveOrInit -- used to reach class InitializersAndSavers for serialization of classes
+	 * products -- list of inventory
+	 * unAvailableProducts -- used to keep track of products borrowed out to customer
+	 */
 	protected Customer customer;
 	protected Product product;
 	protected static InitializersAndSavers saveOrInit = new InitializersAndSavers();
 	protected static List<Product> products = new ArrayList<Product>();
-	protected static List<Integer> saveid = new ArrayList<Integer>();
 	protected static List<Integer> unAvailableProducts = new ArrayList<Integer>();
 	private Scanner userinput;
 
 	public Library() {
 	}
 
-	// Dialogues
+	/*Register new products to product inventory
+	 * @param c used to decide what instance of product is being registered
+	 */
 	public void registerDialogue(char c) {
 		
 		try {
@@ -73,7 +86,6 @@ public class Library implements Serializable {
 					products.add(product = new Book(id, title, value, pages, publisher));
 					Collections.sort(products, Comparator.comparing(Product::getId));
 				}
-				//Kallar på denna statiskt
 				InitializersAndSavers.saveProductList();
 				return;
 			} else {
@@ -87,10 +99,12 @@ public class Library implements Serializable {
 		}
 	}
 
-	// Search
+	/*Search info about customer
+	 * @param name, search customer using customers registered name
+	 * @return name, phoneNumber and list of ID of this customers borrowed products
+	 */
 	public void getCustomerinfo(String name) {
 			if (Pattern.matches("[A-Za-z ]{1,40}", name)) {
-				// Ändrat denna till statisk
 				Iterator<Customer> iterCustomer = Customer.customerList.iterator();
 				while (iterCustomer.hasNext()) {
 					Customer target = iterCustomer.next();
@@ -105,7 +119,10 @@ public class Library implements Serializable {
 			}
 		}
 
-
+	/*Search info about product
+	 * @param id, search info about product using this products ID
+	 * @return prints info about searched product or message if product does not exist
+	 */
 	public void getInfo(int id) {
 		for (Product p : products) {
 			if (p.id == id) {
@@ -115,7 +132,10 @@ public class Library implements Serializable {
 		}
 		System.out.println("Product with ID: " + id + " does not exist, try again.");
 	}
-
+	
+	/*Return borrowed product
+	 * @param id, return product using product ID
+	 */
 	public void productReturn(int id) {
 		boolean idExists = false;
 		for (Product p : products) {
@@ -133,14 +153,12 @@ public class Library implements Serializable {
 		}
 		unAvailableProducts.remove(Integer.valueOf(id));
 		saveOrInit.saveUnAvailableProductsList();
-		//Ändrat denna till statisk
 		Iterator<Customer> iter = Customer.customerList.iterator();
 		while (iter.hasNext()) {
 			Customer target = iter.next();
 			if (target.borrowedProducts.contains(id)) {
 				target.borrowedProducts.remove(Integer.valueOf(id));
 				if (target.borrowedProducts.isEmpty()) {
-					//Ändrat denna till statisk
 					Customer.customerList.remove(target);
 				}
 				saveOrInit.saveCustomerList();
@@ -158,14 +176,13 @@ public class Library implements Serializable {
 			}
 		}
 	}
-
+	
+	/*Check out product to customer
+	 * @param id, check out product using products unique ID
+	 */
 	public void productBorrow(int id) {
 		try {
 			userinput = new Scanner(System.in);
-			//Används ej
-//			String idtoString = Integer.valueOf(id).toString();
-//			String targetId = Integer.toString(id);
-//			char firstInTarget = targetId.charAt(0);
 			for (Product product : products) {
 				if (product.id == id) {
 					String name;
@@ -183,7 +200,6 @@ public class Library implements Serializable {
 							System.out.println("Number should be digits only, try again");
 							return;
 						}
-						//Kallar på denna statiskt
 						for (Customer customer : Customer.customerList) {
 							if (customer.name.toLowerCase().equalsIgnoreCase(name) && customer.number.equals(number)) {
 								customer.borrowedProducts.add(id);
@@ -198,7 +214,6 @@ public class Library implements Serializable {
 						List<Integer> borrowed = new ArrayList<Integer>();
 						borrowed.add(id);
 						Customer c1 = new Customer(name, number, borrowed);
-						//Kallar på denna statiskt
 						Customer.customerList.add(c1);
 						unAvailableProducts.add(id);
 						saveOrInit.saveCustomerList();
@@ -217,14 +232,15 @@ public class Library implements Serializable {
 		}
 	}
 
-	// Getter
+	/*getProducts is used to print inventory and also view which products are borrowed by which customers
+	 * @return prints list of inventory
+	 */
 	public void getProducts() {
 		List<String> printList = new ArrayList<String>();
 		printList.clear();
 		if (products.isEmpty()) {
 			System.out.println("List is empty, try 'register' command to register products");
 		} else if (!(products.isEmpty())) {
-			//Kallar på denna statiskt
 			if (Customer.customerList.isEmpty()) {
 				for (Product product : products) {
 					System.out.println(product);
@@ -232,7 +248,6 @@ public class Library implements Serializable {
 				return;
 			} else {
 				for (Product product1 : products) {
-					//Kallar på denna statiskt
 					for (Customer customer : Customer.customerList) {
 						if (customer.borrowedProducts.contains(product1.id)) {
 							printList.add(product1.toString());
@@ -257,7 +272,9 @@ public class Library implements Serializable {
 
 	}
 
-	// Remove
+	/*Remove product from inventory
+	 * @param id, remove product using products unique ID
+	 */
 	public void removeAtID(int id) {
 		if (!unAvailableProducts.contains(id)) {
 			String id2 = Integer.toString(id);
@@ -269,11 +286,7 @@ public class Library implements Serializable {
 						String targetSplit = target.toString().split(",")[0];
 						if (targetSplit.equals(id2)) {
 							iterproducts.remove();
-							
-							//Används inte
-//							Integer removeId = Integer.parseInt(targetSplit);
 							System.out.println("You've successfully removed \"" + target.getTitle() + "\"");
-							//Kallar på denna statiskt
 							InitializersAndSavers.saveProductList();
 							return;
 						}

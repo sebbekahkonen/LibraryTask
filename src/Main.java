@@ -2,13 +2,30 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+	/*Class Main holds Enum commands, initializes state and holds main method
+	 * 
+	 *@author Niklas Kullberg
+	 *@author Sebastian Kahkonen
+	 */
 public class Main implements Serializable {
-	//Bytte dessa till Long
 	private static final long serialVersionUID = 136420;
-	static boolean runProgram = true;
+	
+	/*newProduct -- used to reach functionality in class Product 
+	 */
 	static Library newProduct = new Library();
 	static private Scanner userinput;
 	
+	/*Available Commands, enum
+	 * list -- prints inventory
+	 * checkout -- check out product to Customer
+	 * checkin -- check in product from Customer
+	 * register -- add product to inventory
+	 * deregister -- remove product from inventory
+	 * info -- print info about specific product using product ID
+	 * customerinfo -- print info about Customer using customers name
+	 * quit -- end program
+	 * view -- view available commands while program is running
+	 */
 	enum Commands {
 		LIST,
 		CHECKOUT,
@@ -20,43 +37,45 @@ public class Main implements Serializable {
 		QUIT,
 		VIEW;
 	}
-
+	
+	/*Sends user through program according to users entered command 
+	 */
 	static Commands option(String options) {
 		Commands usercommand = null;
 		try {
 			userinput = new Scanner(System.in);
 			switch (options) {
-			case "list": // See all products
+			case "list": 
 				usercommand = Commands.LIST;
 				newProduct.getProducts();
 				break;
-			case "checkout": // Borrow book
+			case "checkout": 
 				usercommand = Commands.CHECKOUT;
 				System.out.print("Enter ID of product to checkout:\n>");
 				int checkoutID = Integer.parseInt(userinput.nextLine());
 				newProduct.productBorrow(checkoutID);
 				break;
-			case "checkin": // return borrowed book
+			case "checkin": 
 				usercommand = Commands.CHECKIN;
 				System.out.print("Enter ID of product to return:\n>");
 				int checkinID = Integer.parseInt(userinput.nextLine());
 				newProduct.productReturn(checkinID);
 				break;
-			case "register": // add book
+			case "register": 
 				usercommand = Commands.REGISTER;
 				System.out.print("Enter \"b\" for book or \"m\" for movie:\n>");
 				char c = userinput.next(".").charAt(0);
 				newProduct.registerDialogue(c);
 				break;
-			case "deregister": // remove book
+			case "deregister": 
 				usercommand = Commands.DEREGISTER;
 				System.out.print("Enter ID of product to remove:\n>");
 				int deregisterID = Integer.parseInt(userinput.nextLine());
 				newProduct.removeAtID(deregisterID);
 				break;
-			case "info": // Info for product
+			case "info":
 				usercommand = Commands.INFO;
-				if(newProduct.products.isEmpty()) {
+				if(Library.products.isEmpty()) {
 					System.out.println("There are no products registered");
 				}else {
 					System.out.print("Enter ID of product to search for:\n>");
@@ -74,12 +93,12 @@ public class Main implements Serializable {
 					newProduct.getCustomerinfo(name);
 				}
 				break;
-			case "quit": // Quit program
+			case "quit": 
 				usercommand = Commands.QUIT;
 				System.out.println("Exiting program...");
 				System.exit(0);
 				break;
-			case "view": // View commands
+			case "view": 
 				usercommand = Commands.VIEW;
 				welcomeUser(0);
 				break;
@@ -94,16 +113,15 @@ public class Main implements Serializable {
 		}
 		return usercommand;
 	}
-
+	
+	/*method used to initialize state of program
+	 */
 	public static void initializeState() {
 		Library.saveOrInit.initializeUnAvailableProductsList();
 		Library.saveOrInit.initializeCustomerList();
 		InitializersAndSavers.initializeProductList();
-//		newProduct.saveOrInit.initializeUnAvailableProductsList();
-//		newProduct.saveOrInit.initializeCustomerList();
-//		newProduct.saveOrInit.initializeProductList();
 	}
-
+	
 	public static void welcomeUser(int x) {
 		if (x == 1) {
 			System.out.println("\t\tLibrary System");
@@ -126,7 +144,7 @@ public class Main implements Serializable {
 		initializeState();
 		welcomeUser(1);
 
-		while (runProgram) {
+		while (true) {
 			userinput = new Scanner(System.in);
 			String usercommand;
 			System.out.print("Enter a command\n>");

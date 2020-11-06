@@ -8,10 +8,15 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+	/*Class InitializersAndSavers is used for serialization and deserialization of all classes used in system for Library
+	 * Name of methods describe well what each method does, no further explanation needed
+	 * 
+	 *@author Niklas Kullberg
+	 *@author Sebastian Kahkonen
+	 */
 public class InitializersAndSavers extends Library implements Serializable {
 	private static final long serialVersionUID = 136420;
 
-	// Initializers
 	public static void initializeProductList() {
 		try {
 			File file = new File("product_list.bin");
@@ -49,7 +54,6 @@ public class InitializersAndSavers extends Library implements Serializable {
 			File file = new File("customer_list.bin");
 			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream oin = new ObjectInputStream(fin);
-			//Ändrade till statisk
 			Customer.customerList = (List<Customer>) oin.readObject();
 			oin.close();
 		} catch (FileNotFoundException e) {
@@ -61,14 +65,12 @@ public class InitializersAndSavers extends Library implements Serializable {
 		}
 	}
 
-	// Savers
 	public void saveCustomerList() {
 		File file = new File("customer_list.bin");
 		FileOutputStream fout;
 		try {
 			fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
-			//Ändrade till statisk
 			out.writeObject(Customer.customerList);
 			out.close();
 		} catch (FileNotFoundException e) {
